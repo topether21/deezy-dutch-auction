@@ -1,0 +1,2057 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """measured in seconds"""
+  ttl: Int! = 60
+
+  """refresh the cache entry"""
+  refresh: Boolean! = false
+) on QUERY
+
+"""
+columns and relationships of "auction_metadata"
+"""
+type AuctionMetadata {
+  auctionId: uuid!
+
+  """An object relationship"""
+  auction_metadata_dutch_auction: DutchAuction!
+  endTime: bigint!
+  id: uuid!
+  index: Int!
+  nostrEventId: String
+  price: bigint!
+  scheduledTime: bigint!
+  signedPsbt: String!
+}
+
+"""
+aggregated selection of "auction_metadata"
+"""
+type AuctionMetadataAggregate {
+  aggregate: AuctionMetadataAggregateFields
+  nodes: [AuctionMetadata!]!
+}
+
+input AuctionMetadataAggregateBoolExp {
+  count: auctionMetadataAggregateBoolExpCount
+}
+
+"""
+aggregate fields of "auction_metadata"
+"""
+type AuctionMetadataAggregateFields {
+  avg: AuctionMetadataAvgFields
+  count(columns: [AuctionMetadataSelectColumn!], distinct: Boolean): Int!
+  max: AuctionMetadataMaxFields
+  min: AuctionMetadataMinFields
+  stddev: AuctionMetadataStddevFields
+  stddevPop: AuctionMetadataStddevPopFields
+  stddevSamp: AuctionMetadataStddevSampFields
+  sum: AuctionMetadataSumFields
+  varPop: AuctionMetadataVarPopFields
+  varSamp: AuctionMetadataVarSampFields
+  variance: AuctionMetadataVarianceFields
+}
+
+"""
+order by aggregate values of table "auction_metadata"
+"""
+input AuctionMetadataAggregateOrderBy {
+  avg: AuctionMetadataAvgOrderBy
+  count: OrderBy
+  max: AuctionMetadataMaxOrderBy
+  min: AuctionMetadataMinOrderBy
+  stddev: AuctionMetadataStddevOrderBy
+  stddevPop: AuctionMetadataStddevPopOrderBy
+  stddevSamp: AuctionMetadataStddevSampOrderBy
+  sum: AuctionMetadataSumOrderBy
+  varPop: AuctionMetadataVarPopOrderBy
+  varSamp: AuctionMetadataVarSampOrderBy
+  variance: AuctionMetadataVarianceOrderBy
+}
+
+"""
+input type for inserting array relation for remote table "auction_metadata"
+"""
+input AuctionMetadataArrRelInsertInput {
+  data: [AuctionMetadataInsertInput!]!
+
+  """upsert condition"""
+  onConflict: AuctionMetadataOnConflict
+}
+
+"""aggregate avg on columns"""
+type AuctionMetadataAvgFields {
+  endTime: Float
+  index: Float
+  price: Float
+  scheduledTime: Float
+}
+
+"""
+order by avg() on columns of table "auction_metadata"
+"""
+input AuctionMetadataAvgOrderBy {
+  endTime: OrderBy
+  index: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+}
+
+"""
+Boolean expression to filter rows from the table "auction_metadata". All fields are combined with a logical 'AND'.
+"""
+input AuctionMetadataBoolExp {
+  _and: [AuctionMetadataBoolExp!]
+  _not: AuctionMetadataBoolExp
+  _or: [AuctionMetadataBoolExp!]
+  auctionId: UuidComparisonExp
+  auction_metadata_dutch_auction: DutchAuctionBoolExp
+  endTime: BigintComparisonExp
+  id: UuidComparisonExp
+  index: IntComparisonExp
+  nostrEventId: StringComparisonExp
+  price: BigintComparisonExp
+  scheduledTime: BigintComparisonExp
+  signedPsbt: StringComparisonExp
+}
+
+"""
+unique or primary key constraints on table "auction_metadata"
+"""
+enum AuctionMetadataConstraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  auction_metadata_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "auction_metadata"
+"""
+input AuctionMetadataIncInput {
+  endTime: bigint
+  index: Int
+  price: bigint
+  scheduledTime: bigint
+}
+
+"""
+input type for inserting data into table "auction_metadata"
+"""
+input AuctionMetadataInsertInput {
+  auctionId: uuid
+  auction_metadata_dutch_auction: DutchAuctionObjRelInsertInput
+  endTime: bigint
+  id: uuid
+  index: Int
+  nostrEventId: String
+  price: bigint
+  scheduledTime: bigint
+  signedPsbt: String
+}
+
+"""aggregate max on columns"""
+type AuctionMetadataMaxFields {
+  auctionId: uuid
+  endTime: bigint
+  id: uuid
+  index: Int
+  nostrEventId: String
+  price: bigint
+  scheduledTime: bigint
+  signedPsbt: String
+}
+
+"""
+order by max() on columns of table "auction_metadata"
+"""
+input AuctionMetadataMaxOrderBy {
+  auctionId: OrderBy
+  endTime: OrderBy
+  id: OrderBy
+  index: OrderBy
+  nostrEventId: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+  signedPsbt: OrderBy
+}
+
+"""aggregate min on columns"""
+type AuctionMetadataMinFields {
+  auctionId: uuid
+  endTime: bigint
+  id: uuid
+  index: Int
+  nostrEventId: String
+  price: bigint
+  scheduledTime: bigint
+  signedPsbt: String
+}
+
+"""
+order by min() on columns of table "auction_metadata"
+"""
+input AuctionMetadataMinOrderBy {
+  auctionId: OrderBy
+  endTime: OrderBy
+  id: OrderBy
+  index: OrderBy
+  nostrEventId: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+  signedPsbt: OrderBy
+}
+
+"""
+response of any mutation on the table "auction_metadata"
+"""
+type AuctionMetadataMutationResponse {
+  """number of rows affected by the mutation"""
+  affectedRows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [AuctionMetadata!]!
+}
+
+"""
+on_conflict condition type for table "auction_metadata"
+"""
+input AuctionMetadataOnConflict {
+  constraint: AuctionMetadataConstraint!
+  updateColumns: [AuctionMetadataUpdateColumn!]! = []
+  where: AuctionMetadataBoolExp
+}
+
+"""Ordering options when selecting data from "auction_metadata"."""
+input AuctionMetadataOrderBy {
+  auctionId: OrderBy
+  auction_metadata_dutch_auction: DutchAuctionOrderBy
+  endTime: OrderBy
+  id: OrderBy
+  index: OrderBy
+  nostrEventId: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+  signedPsbt: OrderBy
+}
+
+"""primary key columns input for table: auction_metadata"""
+input AuctionMetadataPkColumnsInput {
+  id: uuid!
+}
+
+"""
+select columns of table "auction_metadata"
+"""
+enum AuctionMetadataSelectColumn {
+  """column name"""
+  auctionId
+
+  """column name"""
+  endTime
+
+  """column name"""
+  id
+
+  """column name"""
+  index
+
+  """column name"""
+  nostrEventId
+
+  """column name"""
+  price
+
+  """column name"""
+  scheduledTime
+
+  """column name"""
+  signedPsbt
+}
+
+"""
+input type for updating data in table "auction_metadata"
+"""
+input AuctionMetadataSetInput {
+  auctionId: uuid
+  endTime: bigint
+  id: uuid
+  index: Int
+  nostrEventId: String
+  price: bigint
+  scheduledTime: bigint
+  signedPsbt: String
+}
+
+"""aggregate stddev on columns"""
+type AuctionMetadataStddevFields {
+  endTime: Float
+  index: Float
+  price: Float
+  scheduledTime: Float
+}
+
+"""
+order by stddev() on columns of table "auction_metadata"
+"""
+input AuctionMetadataStddevOrderBy {
+  endTime: OrderBy
+  index: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+}
+
+"""aggregate stddevPop on columns"""
+type AuctionMetadataStddevPopFields {
+  endTime: Float
+  index: Float
+  price: Float
+  scheduledTime: Float
+}
+
+"""
+order by stddevPop() on columns of table "auction_metadata"
+"""
+input AuctionMetadataStddevPopOrderBy {
+  endTime: OrderBy
+  index: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+}
+
+"""aggregate stddevSamp on columns"""
+type AuctionMetadataStddevSampFields {
+  endTime: Float
+  index: Float
+  price: Float
+  scheduledTime: Float
+}
+
+"""
+order by stddevSamp() on columns of table "auction_metadata"
+"""
+input AuctionMetadataStddevSampOrderBy {
+  endTime: OrderBy
+  index: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+}
+
+"""
+Streaming cursor of the table "auction_metadata"
+"""
+input AuctionMetadataStreamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: AuctionMetadataStreamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input AuctionMetadataStreamCursorValueInput {
+  auctionId: uuid
+  endTime: bigint
+  id: uuid
+  index: Int
+  nostrEventId: String
+  price: bigint
+  scheduledTime: bigint
+  signedPsbt: String
+}
+
+"""aggregate sum on columns"""
+type AuctionMetadataSumFields {
+  endTime: bigint
+  index: Int
+  price: bigint
+  scheduledTime: bigint
+}
+
+"""
+order by sum() on columns of table "auction_metadata"
+"""
+input AuctionMetadataSumOrderBy {
+  endTime: OrderBy
+  index: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+}
+
+"""
+update columns of table "auction_metadata"
+"""
+enum AuctionMetadataUpdateColumn {
+  """column name"""
+  auctionId
+
+  """column name"""
+  endTime
+
+  """column name"""
+  id
+
+  """column name"""
+  index
+
+  """column name"""
+  nostrEventId
+
+  """column name"""
+  price
+
+  """column name"""
+  scheduledTime
+
+  """column name"""
+  signedPsbt
+}
+
+input AuctionMetadataUpdates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: AuctionMetadataIncInput
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: AuctionMetadataSetInput
+
+  """filter the rows which have to be updated"""
+  where: AuctionMetadataBoolExp!
+}
+
+"""aggregate varPop on columns"""
+type AuctionMetadataVarPopFields {
+  endTime: Float
+  index: Float
+  price: Float
+  scheduledTime: Float
+}
+
+"""
+order by varPop() on columns of table "auction_metadata"
+"""
+input AuctionMetadataVarPopOrderBy {
+  endTime: OrderBy
+  index: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+}
+
+"""aggregate varSamp on columns"""
+type AuctionMetadataVarSampFields {
+  endTime: Float
+  index: Float
+  price: Float
+  scheduledTime: Float
+}
+
+"""
+order by varSamp() on columns of table "auction_metadata"
+"""
+input AuctionMetadataVarSampOrderBy {
+  endTime: OrderBy
+  index: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+}
+
+"""aggregate variance on columns"""
+type AuctionMetadataVarianceFields {
+  endTime: Float
+  index: Float
+  price: Float
+  scheduledTime: Float
+}
+
+"""
+order by variance() on columns of table "auction_metadata"
+"""
+input AuctionMetadataVarianceOrderBy {
+  endTime: OrderBy
+  index: OrderBy
+  price: OrderBy
+  scheduledTime: OrderBy
+}
+
+"""
+columns and relationships of "auction_status"
+"""
+type AuctionStatus {
+  """An array relationship"""
+  dutchAuctions(
+    """distinct select on columns"""
+    distinctOn: [DutchAuctionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DutchAuctionOrderBy!]
+
+    """filter the rows returned"""
+    where: DutchAuctionBoolExp
+  ): [DutchAuction!]!
+
+  """An aggregate relationship"""
+  dutchAuctionsAggregate(
+    """distinct select on columns"""
+    distinctOn: [DutchAuctionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DutchAuctionOrderBy!]
+
+    """filter the rows returned"""
+    where: DutchAuctionBoolExp
+  ): DutchAuctionAggregate!
+  value: String!
+}
+
+"""
+aggregated selection of "auction_status"
+"""
+type AuctionStatusAggregate {
+  aggregate: AuctionStatusAggregateFields
+  nodes: [AuctionStatus!]!
+}
+
+"""
+aggregate fields of "auction_status"
+"""
+type AuctionStatusAggregateFields {
+  count(columns: [AuctionStatusSelectColumn!], distinct: Boolean): Int!
+  max: AuctionStatusMaxFields
+  min: AuctionStatusMinFields
+}
+
+"""
+Boolean expression to filter rows from the table "auction_status". All fields are combined with a logical 'AND'.
+"""
+input AuctionStatusBoolExp {
+  _and: [AuctionStatusBoolExp!]
+  _not: AuctionStatusBoolExp
+  _or: [AuctionStatusBoolExp!]
+  dutchAuctions: DutchAuctionBoolExp
+  dutchAuctionsAggregate: DutchAuctionAggregateBoolExp
+  value: StringComparisonExp
+}
+
+"""
+unique or primary key constraints on table "auction_status"
+"""
+enum AuctionStatusConstraint {
+  """
+  unique or primary key constraint on columns "value"
+  """
+  auction_status_pkey
+}
+
+enum AuctionStatusEnum {
+  FINISHED
+  PENDING
+  RUNNING
+  SPENT
+  STOPPED
+}
+
+"""
+Boolean expression to compare columns of type "AuctionStatusEnum". All fields are combined with logical 'AND'.
+"""
+input AuctionStatusEnumComparisonExp {
+  _eq: AuctionStatusEnum
+  _in: [AuctionStatusEnum!]
+  _isNull: Boolean
+  _neq: AuctionStatusEnum
+  _nin: [AuctionStatusEnum!]
+}
+
+"""
+input type for inserting data into table "auction_status"
+"""
+input AuctionStatusInsertInput {
+  dutchAuctions: DutchAuctionArrRelInsertInput
+  value: String
+}
+
+"""aggregate max on columns"""
+type AuctionStatusMaxFields {
+  value: String
+}
+
+"""aggregate min on columns"""
+type AuctionStatusMinFields {
+  value: String
+}
+
+"""
+response of any mutation on the table "auction_status"
+"""
+type AuctionStatusMutationResponse {
+  """number of rows affected by the mutation"""
+  affectedRows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [AuctionStatus!]!
+}
+
+"""
+input type for inserting object relation for remote table "auction_status"
+"""
+input AuctionStatusObjRelInsertInput {
+  data: AuctionStatusInsertInput!
+
+  """upsert condition"""
+  onConflict: AuctionStatusOnConflict
+}
+
+"""
+on_conflict condition type for table "auction_status"
+"""
+input AuctionStatusOnConflict {
+  constraint: AuctionStatusConstraint!
+  updateColumns: [AuctionStatusUpdateColumn!]! = []
+  where: AuctionStatusBoolExp
+}
+
+"""Ordering options when selecting data from "auction_status"."""
+input AuctionStatusOrderBy {
+  dutchAuctionsAggregate: DutchAuctionAggregateOrderBy
+  value: OrderBy
+}
+
+"""primary key columns input for table: auction_status"""
+input AuctionStatusPkColumnsInput {
+  value: String!
+}
+
+"""
+select columns of table "auction_status"
+"""
+enum AuctionStatusSelectColumn {
+  """column name"""
+  value
+}
+
+"""
+input type for updating data in table "auction_status"
+"""
+input AuctionStatusSetInput {
+  value: String
+}
+
+"""
+Streaming cursor of the table "auction_status"
+"""
+input AuctionStatusStreamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: AuctionStatusStreamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input AuctionStatusStreamCursorValueInput {
+  value: String
+}
+
+"""
+update columns of table "auction_status"
+"""
+enum AuctionStatusUpdateColumn {
+  """column name"""
+  value
+}
+
+input AuctionStatusUpdates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: AuctionStatusSetInput
+
+  """filter the rows which have to be updated"""
+  where: AuctionStatusBoolExp!
+}
+
+"""
+Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'.
+"""
+input BigintComparisonExp {
+  _eq: bigint
+  _gt: bigint
+  _gte: bigint
+  _in: [bigint!]
+  _isNull: Boolean
+  _lt: bigint
+  _lte: bigint
+  _neq: bigint
+  _nin: [bigint!]
+}
+
+"""ordering argument of a cursor"""
+enum CursorOrdering {
+  """ascending ordering of the cursor"""
+  ASC
+
+  """descending ordering of the cursor"""
+  DESC
+}
+
+"""
+columns and relationships of "dutch_auction"
+"""
+type DutchAuction {
+  auctionId: uuid!
+  createdAt: timestamptz
+  currentPrice: Int!
+  decreaseAmount: Int!
+
+  """An aggregate relationship"""
+  dutchAuctionAuctionMetadataAggregate(
+    """distinct select on columns"""
+    distinctOn: [AuctionMetadataSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionMetadataOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionMetadataBoolExp
+  ): AuctionMetadataAggregate!
+
+  """An array relationship"""
+  dutch_auction_auction_metadata(
+    """distinct select on columns"""
+    distinctOn: [AuctionMetadataSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionMetadataOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionMetadataBoolExp
+  ): [AuctionMetadata!]!
+
+  """An object relationship"""
+  dutch_auction_auction_status: AuctionStatus!
+  id: uuid!
+  initialPrice: Int!
+  inscriptionId: String!
+  ordinalsAddress: String
+  reservePrice: Int!
+  scheduledISODate: timestamptz
+  secondsBetweenEachDecrease: Int!
+  startTime: bigint!
+  status: AuctionStatusEnum!
+  txid: String
+  updatedAt: timestamptz
+  vout: Int!
+}
+
+"""
+aggregated selection of "dutch_auction"
+"""
+type DutchAuctionAggregate {
+  aggregate: DutchAuctionAggregateFields
+  nodes: [DutchAuction!]!
+}
+
+input DutchAuctionAggregateBoolExp {
+  count: dutchAuctionAggregateBoolExpCount
+}
+
+"""
+aggregate fields of "dutch_auction"
+"""
+type DutchAuctionAggregateFields {
+  avg: DutchAuctionAvgFields
+  count(columns: [DutchAuctionSelectColumn!], distinct: Boolean): Int!
+  max: DutchAuctionMaxFields
+  min: DutchAuctionMinFields
+  stddev: DutchAuctionStddevFields
+  stddevPop: DutchAuctionStddevPopFields
+  stddevSamp: DutchAuctionStddevSampFields
+  sum: DutchAuctionSumFields
+  varPop: DutchAuctionVarPopFields
+  varSamp: DutchAuctionVarSampFields
+  variance: DutchAuctionVarianceFields
+}
+
+"""
+order by aggregate values of table "dutch_auction"
+"""
+input DutchAuctionAggregateOrderBy {
+  avg: DutchAuctionAvgOrderBy
+  count: OrderBy
+  max: DutchAuctionMaxOrderBy
+  min: DutchAuctionMinOrderBy
+  stddev: DutchAuctionStddevOrderBy
+  stddevPop: DutchAuctionStddevPopOrderBy
+  stddevSamp: DutchAuctionStddevSampOrderBy
+  sum: DutchAuctionSumOrderBy
+  varPop: DutchAuctionVarPopOrderBy
+  varSamp: DutchAuctionVarSampOrderBy
+  variance: DutchAuctionVarianceOrderBy
+}
+
+"""
+input type for inserting array relation for remote table "dutch_auction"
+"""
+input DutchAuctionArrRelInsertInput {
+  data: [DutchAuctionInsertInput!]!
+
+  """upsert condition"""
+  onConflict: DutchAuctionOnConflict
+}
+
+"""aggregate avg on columns"""
+type DutchAuctionAvgFields {
+  currentPrice: Float
+  decreaseAmount: Float
+  initialPrice: Float
+  reservePrice: Float
+  secondsBetweenEachDecrease: Float
+  startTime: Float
+  vout: Float
+}
+
+"""
+order by avg() on columns of table "dutch_auction"
+"""
+input DutchAuctionAvgOrderBy {
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  initialPrice: OrderBy
+  reservePrice: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  vout: OrderBy
+}
+
+"""
+Boolean expression to filter rows from the table "dutch_auction". All fields are combined with a logical 'AND'.
+"""
+input DutchAuctionBoolExp {
+  _and: [DutchAuctionBoolExp!]
+  _not: DutchAuctionBoolExp
+  _or: [DutchAuctionBoolExp!]
+  auctionId: UuidComparisonExp
+  createdAt: TimestamptzComparisonExp
+  currentPrice: IntComparisonExp
+  decreaseAmount: IntComparisonExp
+  dutch_auction_auction_metadata: AuctionMetadataBoolExp
+  dutch_auction_auction_metadataAggregate: AuctionMetadataAggregateBoolExp
+  dutch_auction_auction_status: AuctionStatusBoolExp
+  id: UuidComparisonExp
+  initialPrice: IntComparisonExp
+  inscriptionId: StringComparisonExp
+  ordinalsAddress: StringComparisonExp
+  reservePrice: IntComparisonExp
+  scheduledISODate: TimestamptzComparisonExp
+  secondsBetweenEachDecrease: IntComparisonExp
+  startTime: BigintComparisonExp
+  status: AuctionStatusEnumComparisonExp
+  txid: StringComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  vout: IntComparisonExp
+}
+
+"""
+unique or primary key constraints on table "dutch_auction"
+"""
+enum DutchAuctionConstraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  dutch_auction_id_key
+
+  """
+  unique or primary key constraint on columns "auction_id"
+  """
+  dutch_auction_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "dutch_auction"
+"""
+input DutchAuctionIncInput {
+  currentPrice: Int
+  decreaseAmount: Int
+  initialPrice: Int
+  reservePrice: Int
+  secondsBetweenEachDecrease: Int
+  startTime: bigint
+  vout: Int
+}
+
+"""
+input type for inserting data into table "dutch_auction"
+"""
+input DutchAuctionInsertInput {
+  auctionId: uuid
+  createdAt: timestamptz
+  currentPrice: Int
+  decreaseAmount: Int
+  dutch_auction_auction_metadata: AuctionMetadataArrRelInsertInput
+  dutch_auction_auction_status: AuctionStatusObjRelInsertInput
+  id: uuid
+  initialPrice: Int
+  inscriptionId: String
+  ordinalsAddress: String
+  reservePrice: Int
+  scheduledISODate: timestamptz
+  secondsBetweenEachDecrease: Int
+  startTime: bigint
+  status: AuctionStatusEnum
+  txid: String
+  updatedAt: timestamptz
+  vout: Int
+}
+
+"""aggregate max on columns"""
+type DutchAuctionMaxFields {
+  auctionId: uuid
+  createdAt: timestamptz
+  currentPrice: Int
+  decreaseAmount: Int
+  id: uuid
+  initialPrice: Int
+  inscriptionId: String
+  ordinalsAddress: String
+  reservePrice: Int
+  scheduledISODate: timestamptz
+  secondsBetweenEachDecrease: Int
+  startTime: bigint
+  txid: String
+  updatedAt: timestamptz
+  vout: Int
+}
+
+"""
+order by max() on columns of table "dutch_auction"
+"""
+input DutchAuctionMaxOrderBy {
+  auctionId: OrderBy
+  createdAt: OrderBy
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  id: OrderBy
+  initialPrice: OrderBy
+  inscriptionId: OrderBy
+  ordinalsAddress: OrderBy
+  reservePrice: OrderBy
+  scheduledISODate: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  txid: OrderBy
+  updatedAt: OrderBy
+  vout: OrderBy
+}
+
+"""aggregate min on columns"""
+type DutchAuctionMinFields {
+  auctionId: uuid
+  createdAt: timestamptz
+  currentPrice: Int
+  decreaseAmount: Int
+  id: uuid
+  initialPrice: Int
+  inscriptionId: String
+  ordinalsAddress: String
+  reservePrice: Int
+  scheduledISODate: timestamptz
+  secondsBetweenEachDecrease: Int
+  startTime: bigint
+  txid: String
+  updatedAt: timestamptz
+  vout: Int
+}
+
+"""
+order by min() on columns of table "dutch_auction"
+"""
+input DutchAuctionMinOrderBy {
+  auctionId: OrderBy
+  createdAt: OrderBy
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  id: OrderBy
+  initialPrice: OrderBy
+  inscriptionId: OrderBy
+  ordinalsAddress: OrderBy
+  reservePrice: OrderBy
+  scheduledISODate: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  txid: OrderBy
+  updatedAt: OrderBy
+  vout: OrderBy
+}
+
+"""
+response of any mutation on the table "dutch_auction"
+"""
+type DutchAuctionMutationResponse {
+  """number of rows affected by the mutation"""
+  affectedRows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [DutchAuction!]!
+}
+
+"""
+input type for inserting object relation for remote table "dutch_auction"
+"""
+input DutchAuctionObjRelInsertInput {
+  data: DutchAuctionInsertInput!
+
+  """upsert condition"""
+  onConflict: DutchAuctionOnConflict
+}
+
+"""
+on_conflict condition type for table "dutch_auction"
+"""
+input DutchAuctionOnConflict {
+  constraint: DutchAuctionConstraint!
+  updateColumns: [DutchAuctionUpdateColumn!]! = []
+  where: DutchAuctionBoolExp
+}
+
+"""Ordering options when selecting data from "dutch_auction"."""
+input DutchAuctionOrderBy {
+  auctionId: OrderBy
+  createdAt: OrderBy
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  dutch_auction_auction_metadataAggregate: AuctionMetadataAggregateOrderBy
+  dutch_auction_auction_status: AuctionStatusOrderBy
+  id: OrderBy
+  initialPrice: OrderBy
+  inscriptionId: OrderBy
+  ordinalsAddress: OrderBy
+  reservePrice: OrderBy
+  scheduledISODate: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  status: OrderBy
+  txid: OrderBy
+  updatedAt: OrderBy
+  vout: OrderBy
+}
+
+"""primary key columns input for table: dutch_auction"""
+input DutchAuctionPkColumnsInput {
+  auctionId: uuid!
+}
+
+"""
+select columns of table "dutch_auction"
+"""
+enum DutchAuctionSelectColumn {
+  """column name"""
+  auctionId
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  currentPrice
+
+  """column name"""
+  decreaseAmount
+
+  """column name"""
+  id
+
+  """column name"""
+  initialPrice
+
+  """column name"""
+  inscriptionId
+
+  """column name"""
+  ordinalsAddress
+
+  """column name"""
+  reservePrice
+
+  """column name"""
+  scheduledISODate
+
+  """column name"""
+  secondsBetweenEachDecrease
+
+  """column name"""
+  startTime
+
+  """column name"""
+  status
+
+  """column name"""
+  txid
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  vout
+}
+
+"""
+input type for updating data in table "dutch_auction"
+"""
+input DutchAuctionSetInput {
+  auctionId: uuid
+  createdAt: timestamptz
+  currentPrice: Int
+  decreaseAmount: Int
+  id: uuid
+  initialPrice: Int
+  inscriptionId: String
+  ordinalsAddress: String
+  reservePrice: Int
+  scheduledISODate: timestamptz
+  secondsBetweenEachDecrease: Int
+  startTime: bigint
+  status: AuctionStatusEnum
+  txid: String
+  updatedAt: timestamptz
+  vout: Int
+}
+
+"""aggregate stddev on columns"""
+type DutchAuctionStddevFields {
+  currentPrice: Float
+  decreaseAmount: Float
+  initialPrice: Float
+  reservePrice: Float
+  secondsBetweenEachDecrease: Float
+  startTime: Float
+  vout: Float
+}
+
+"""
+order by stddev() on columns of table "dutch_auction"
+"""
+input DutchAuctionStddevOrderBy {
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  initialPrice: OrderBy
+  reservePrice: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  vout: OrderBy
+}
+
+"""aggregate stddevPop on columns"""
+type DutchAuctionStddevPopFields {
+  currentPrice: Float
+  decreaseAmount: Float
+  initialPrice: Float
+  reservePrice: Float
+  secondsBetweenEachDecrease: Float
+  startTime: Float
+  vout: Float
+}
+
+"""
+order by stddevPop() on columns of table "dutch_auction"
+"""
+input DutchAuctionStddevPopOrderBy {
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  initialPrice: OrderBy
+  reservePrice: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  vout: OrderBy
+}
+
+"""aggregate stddevSamp on columns"""
+type DutchAuctionStddevSampFields {
+  currentPrice: Float
+  decreaseAmount: Float
+  initialPrice: Float
+  reservePrice: Float
+  secondsBetweenEachDecrease: Float
+  startTime: Float
+  vout: Float
+}
+
+"""
+order by stddevSamp() on columns of table "dutch_auction"
+"""
+input DutchAuctionStddevSampOrderBy {
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  initialPrice: OrderBy
+  reservePrice: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  vout: OrderBy
+}
+
+"""
+Streaming cursor of the table "dutch_auction"
+"""
+input DutchAuctionStreamCursorInput {
+  """Stream column input with initial value"""
+  initialValue: DutchAuctionStreamCursorValueInput!
+
+  """cursor ordering"""
+  ordering: CursorOrdering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input DutchAuctionStreamCursorValueInput {
+  auctionId: uuid
+  createdAt: timestamptz
+  currentPrice: Int
+  decreaseAmount: Int
+  id: uuid
+  initialPrice: Int
+  inscriptionId: String
+  ordinalsAddress: String
+  reservePrice: Int
+  scheduledISODate: timestamptz
+  secondsBetweenEachDecrease: Int
+  startTime: bigint
+  status: AuctionStatusEnum
+  txid: String
+  updatedAt: timestamptz
+  vout: Int
+}
+
+"""aggregate sum on columns"""
+type DutchAuctionSumFields {
+  currentPrice: Int
+  decreaseAmount: Int
+  initialPrice: Int
+  reservePrice: Int
+  secondsBetweenEachDecrease: Int
+  startTime: bigint
+  vout: Int
+}
+
+"""
+order by sum() on columns of table "dutch_auction"
+"""
+input DutchAuctionSumOrderBy {
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  initialPrice: OrderBy
+  reservePrice: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  vout: OrderBy
+}
+
+"""
+update columns of table "dutch_auction"
+"""
+enum DutchAuctionUpdateColumn {
+  """column name"""
+  auctionId
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  currentPrice
+
+  """column name"""
+  decreaseAmount
+
+  """column name"""
+  id
+
+  """column name"""
+  initialPrice
+
+  """column name"""
+  inscriptionId
+
+  """column name"""
+  ordinalsAddress
+
+  """column name"""
+  reservePrice
+
+  """column name"""
+  scheduledISODate
+
+  """column name"""
+  secondsBetweenEachDecrease
+
+  """column name"""
+  startTime
+
+  """column name"""
+  status
+
+  """column name"""
+  txid
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  vout
+}
+
+input DutchAuctionUpdates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: DutchAuctionIncInput
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: DutchAuctionSetInput
+
+  """filter the rows which have to be updated"""
+  where: DutchAuctionBoolExp!
+}
+
+"""aggregate varPop on columns"""
+type DutchAuctionVarPopFields {
+  currentPrice: Float
+  decreaseAmount: Float
+  initialPrice: Float
+  reservePrice: Float
+  secondsBetweenEachDecrease: Float
+  startTime: Float
+  vout: Float
+}
+
+"""
+order by varPop() on columns of table "dutch_auction"
+"""
+input DutchAuctionVarPopOrderBy {
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  initialPrice: OrderBy
+  reservePrice: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  vout: OrderBy
+}
+
+"""aggregate varSamp on columns"""
+type DutchAuctionVarSampFields {
+  currentPrice: Float
+  decreaseAmount: Float
+  initialPrice: Float
+  reservePrice: Float
+  secondsBetweenEachDecrease: Float
+  startTime: Float
+  vout: Float
+}
+
+"""
+order by varSamp() on columns of table "dutch_auction"
+"""
+input DutchAuctionVarSampOrderBy {
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  initialPrice: OrderBy
+  reservePrice: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  vout: OrderBy
+}
+
+"""aggregate variance on columns"""
+type DutchAuctionVarianceFields {
+  currentPrice: Float
+  decreaseAmount: Float
+  initialPrice: Float
+  reservePrice: Float
+  secondsBetweenEachDecrease: Float
+  startTime: Float
+  vout: Float
+}
+
+"""
+order by variance() on columns of table "dutch_auction"
+"""
+input DutchAuctionVarianceOrderBy {
+  currentPrice: OrderBy
+  decreaseAmount: OrderBy
+  initialPrice: OrderBy
+  reservePrice: OrderBy
+  secondsBetweenEachDecrease: OrderBy
+  startTime: OrderBy
+  vout: OrderBy
+}
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input IntComparisonExp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _isNull: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+"""column ordering options"""
+enum OrderBy {
+  """in ascending order, nulls last"""
+  ASC
+
+  """in ascending order, nulls first"""
+  ASC_NULLS_FIRST
+
+  """in ascending order, nulls last"""
+  ASC_NULLS_LAST
+
+  """in descending order, nulls first"""
+  DESC
+
+  """in descending order, nulls first"""
+  DESC_NULLS_FIRST
+
+  """in descending order, nulls last"""
+  DESC_NULLS_LAST
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input StringComparisonExp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _isNull: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
+input TimestamptzComparisonExp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _isNull: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
+"""
+Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'.
+"""
+input UuidComparisonExp {
+  _eq: uuid
+  _gt: uuid
+  _gte: uuid
+  _in: [uuid!]
+  _isNull: Boolean
+  _lt: uuid
+  _lte: uuid
+  _neq: uuid
+  _nin: [uuid!]
+}
+
+input auctionMetadataAggregateBoolExpCount {
+  arguments: [AuctionMetadataSelectColumn!]
+  distinct: Boolean
+  filter: AuctionMetadataBoolExp
+  predicate: IntComparisonExp!
+}
+
+scalar bigint
+
+input dutchAuctionAggregateBoolExpCount {
+  arguments: [DutchAuctionSelectColumn!]
+  distinct: Boolean
+  filter: DutchAuctionBoolExp
+  predicate: IntComparisonExp!
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete data from the table: "auction_metadata"
+  """
+  deleteAuctionMetadata(
+    """filter the rows which have to be deleted"""
+    where: AuctionMetadataBoolExp!
+  ): AuctionMetadataMutationResponse
+
+  """
+  delete single row from the table: "auction_metadata"
+  """
+  deleteAuctionMetadataByPk(id: uuid!): AuctionMetadata
+
+  """
+  delete data from the table: "auction_status"
+  """
+  deleteAuctionStatus(
+    """filter the rows which have to be deleted"""
+    where: AuctionStatusBoolExp!
+  ): AuctionStatusMutationResponse
+
+  """
+  delete single row from the table: "auction_status"
+  """
+  deleteAuctionStatusByPk(value: String!): AuctionStatus
+
+  """
+  delete data from the table: "dutch_auction"
+  """
+  deleteDutchAuction(
+    """filter the rows which have to be deleted"""
+    where: DutchAuctionBoolExp!
+  ): DutchAuctionMutationResponse
+
+  """
+  delete single row from the table: "dutch_auction"
+  """
+  deleteDutchAuctionByPk(auctionId: uuid!): DutchAuction
+
+  """
+  insert data into the table: "auction_metadata"
+  """
+  insertAuctionMetadata(
+    """the rows to be inserted"""
+    objects: [AuctionMetadataInsertInput!]!
+
+    """upsert condition"""
+    onConflict: AuctionMetadataOnConflict
+  ): AuctionMetadataMutationResponse
+
+  """
+  insert a single row into the table: "auction_metadata"
+  """
+  insertAuctionMetadataOne(
+    """the row to be inserted"""
+    object: AuctionMetadataInsertInput!
+
+    """upsert condition"""
+    onConflict: AuctionMetadataOnConflict
+  ): AuctionMetadata
+
+  """
+  insert data into the table: "auction_status"
+  """
+  insertAuctionStatus(
+    """the rows to be inserted"""
+    objects: [AuctionStatusInsertInput!]!
+
+    """upsert condition"""
+    onConflict: AuctionStatusOnConflict
+  ): AuctionStatusMutationResponse
+
+  """
+  insert a single row into the table: "auction_status"
+  """
+  insertAuctionStatusOne(
+    """the row to be inserted"""
+    object: AuctionStatusInsertInput!
+
+    """upsert condition"""
+    onConflict: AuctionStatusOnConflict
+  ): AuctionStatus
+
+  """
+  insert data into the table: "dutch_auction"
+  """
+  insertDutchAuction(
+    """the rows to be inserted"""
+    objects: [DutchAuctionInsertInput!]!
+
+    """upsert condition"""
+    onConflict: DutchAuctionOnConflict
+  ): DutchAuctionMutationResponse
+
+  """
+  insert a single row into the table: "dutch_auction"
+  """
+  insertDutchAuctionOne(
+    """the row to be inserted"""
+    object: DutchAuctionInsertInput!
+
+    """upsert condition"""
+    onConflict: DutchAuctionOnConflict
+  ): DutchAuction
+
+  """
+  update data of the table: "auction_metadata"
+  """
+  updateAuctionMetadata(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: AuctionMetadataIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: AuctionMetadataSetInput
+
+    """filter the rows which have to be updated"""
+    where: AuctionMetadataBoolExp!
+  ): AuctionMetadataMutationResponse
+
+  """
+  update single row of the table: "auction_metadata"
+  """
+  updateAuctionMetadataByPk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: AuctionMetadataIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: AuctionMetadataSetInput
+    pkColumns: AuctionMetadataPkColumnsInput!
+  ): AuctionMetadata
+
+  """
+  update multiples rows of table: "auction_metadata"
+  """
+  updateAuctionMetadataMany(
+    """updates to execute, in order"""
+    updates: [AuctionMetadataUpdates!]!
+  ): [AuctionMetadataMutationResponse]
+
+  """
+  update data of the table: "auction_status"
+  """
+  updateAuctionStatus(
+    """sets the columns of the filtered rows to the given values"""
+    _set: AuctionStatusSetInput
+
+    """filter the rows which have to be updated"""
+    where: AuctionStatusBoolExp!
+  ): AuctionStatusMutationResponse
+
+  """
+  update single row of the table: "auction_status"
+  """
+  updateAuctionStatusByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: AuctionStatusSetInput
+    pkColumns: AuctionStatusPkColumnsInput!
+  ): AuctionStatus
+
+  """
+  update multiples rows of table: "auction_status"
+  """
+  updateAuctionStatusMany(
+    """updates to execute, in order"""
+    updates: [AuctionStatusUpdates!]!
+  ): [AuctionStatusMutationResponse]
+
+  """
+  update data of the table: "dutch_auction"
+  """
+  updateDutchAuction(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: DutchAuctionIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: DutchAuctionSetInput
+
+    """filter the rows which have to be updated"""
+    where: DutchAuctionBoolExp!
+  ): DutchAuctionMutationResponse
+
+  """
+  update single row of the table: "dutch_auction"
+  """
+  updateDutchAuctionByPk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: DutchAuctionIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: DutchAuctionSetInput
+    pkColumns: DutchAuctionPkColumnsInput!
+  ): DutchAuction
+
+  """
+  update multiples rows of table: "dutch_auction"
+  """
+  updateDutchAuctionMany(
+    """updates to execute, in order"""
+    updates: [DutchAuctionUpdates!]!
+  ): [DutchAuctionMutationResponse]
+}
+
+type query_root {
+  """
+  fetch data from the table: "auction_metadata"
+  """
+  auctionMetadata(
+    """distinct select on columns"""
+    distinctOn: [AuctionMetadataSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionMetadataOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionMetadataBoolExp
+  ): [AuctionMetadata!]!
+
+  """
+  fetch aggregated fields from the table: "auction_metadata"
+  """
+  auctionMetadataAggregate(
+    """distinct select on columns"""
+    distinctOn: [AuctionMetadataSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionMetadataOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionMetadataBoolExp
+  ): AuctionMetadataAggregate!
+
+  """
+  fetch data from the table: "auction_metadata" using primary key columns
+  """
+  auctionMetadataByPk(id: uuid!): AuctionMetadata
+
+  """
+  fetch data from the table: "auction_status"
+  """
+  auctionStatus(
+    """distinct select on columns"""
+    distinctOn: [AuctionStatusSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionStatusOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionStatusBoolExp
+  ): [AuctionStatus!]!
+
+  """
+  fetch aggregated fields from the table: "auction_status"
+  """
+  auctionStatusAggregate(
+    """distinct select on columns"""
+    distinctOn: [AuctionStatusSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionStatusOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionStatusBoolExp
+  ): AuctionStatusAggregate!
+
+  """fetch data from the table: "auction_status" using primary key columns"""
+  auctionStatusByPk(value: String!): AuctionStatus
+
+  """
+  fetch data from the table: "dutch_auction"
+  """
+  dutchAuction(
+    """distinct select on columns"""
+    distinctOn: [DutchAuctionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DutchAuctionOrderBy!]
+
+    """filter the rows returned"""
+    where: DutchAuctionBoolExp
+  ): [DutchAuction!]!
+
+  """
+  fetch aggregated fields from the table: "dutch_auction"
+  """
+  dutchAuctionAggregate(
+    """distinct select on columns"""
+    distinctOn: [DutchAuctionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DutchAuctionOrderBy!]
+
+    """filter the rows returned"""
+    where: DutchAuctionBoolExp
+  ): DutchAuctionAggregate!
+
+  """fetch data from the table: "dutch_auction" using primary key columns"""
+  dutchAuctionByPk(auctionId: uuid!): DutchAuction
+}
+
+type subscription_root {
+  """
+  fetch data from the table: "auction_metadata"
+  """
+  auctionMetadata(
+    """distinct select on columns"""
+    distinctOn: [AuctionMetadataSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionMetadataOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionMetadataBoolExp
+  ): [AuctionMetadata!]!
+
+  """
+  fetch aggregated fields from the table: "auction_metadata"
+  """
+  auctionMetadataAggregate(
+    """distinct select on columns"""
+    distinctOn: [AuctionMetadataSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionMetadataOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionMetadataBoolExp
+  ): AuctionMetadataAggregate!
+
+  """
+  fetch data from the table: "auction_metadata" using primary key columns
+  """
+  auctionMetadataByPk(id: uuid!): AuctionMetadata
+
+  """
+  fetch data from the table in a streaming manner: "auction_metadata"
+  """
+  auctionMetadataStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [AuctionMetadataStreamCursorInput]!
+
+    """filter the rows returned"""
+    where: AuctionMetadataBoolExp
+  ): [AuctionMetadata!]!
+
+  """
+  fetch data from the table: "auction_status"
+  """
+  auctionStatus(
+    """distinct select on columns"""
+    distinctOn: [AuctionStatusSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionStatusOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionStatusBoolExp
+  ): [AuctionStatus!]!
+
+  """
+  fetch aggregated fields from the table: "auction_status"
+  """
+  auctionStatusAggregate(
+    """distinct select on columns"""
+    distinctOn: [AuctionStatusSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [AuctionStatusOrderBy!]
+
+    """filter the rows returned"""
+    where: AuctionStatusBoolExp
+  ): AuctionStatusAggregate!
+
+  """fetch data from the table: "auction_status" using primary key columns"""
+  auctionStatusByPk(value: String!): AuctionStatus
+
+  """
+  fetch data from the table in a streaming manner: "auction_status"
+  """
+  auctionStatusStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [AuctionStatusStreamCursorInput]!
+
+    """filter the rows returned"""
+    where: AuctionStatusBoolExp
+  ): [AuctionStatus!]!
+
+  """
+  fetch data from the table: "dutch_auction"
+  """
+  dutchAuction(
+    """distinct select on columns"""
+    distinctOn: [DutchAuctionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DutchAuctionOrderBy!]
+
+    """filter the rows returned"""
+    where: DutchAuctionBoolExp
+  ): [DutchAuction!]!
+
+  """
+  fetch aggregated fields from the table: "dutch_auction"
+  """
+  dutchAuctionAggregate(
+    """distinct select on columns"""
+    distinctOn: [DutchAuctionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DutchAuctionOrderBy!]
+
+    """filter the rows returned"""
+    where: DutchAuctionBoolExp
+  ): DutchAuctionAggregate!
+
+  """fetch data from the table: "dutch_auction" using primary key columns"""
+  dutchAuctionByPk(auctionId: uuid!): DutchAuction
+
+  """
+  fetch data from the table in a streaming manner: "dutch_auction"
+  """
+  dutchAuctionStream(
+    """maximum number of rows returned in a single batch"""
+    batchSize: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [DutchAuctionStreamCursorInput]!
+
+    """filter the rows returned"""
+    where: DutchAuctionBoolExp
+  ): [DutchAuction!]!
+}
+
+scalar timestamptz
+
+scalar uuid

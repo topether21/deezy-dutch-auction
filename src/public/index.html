@@ -60,18 +60,19 @@
     ></script>
     <script type="module">
       // import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
-      // const socket = io("https://2737-181-78-112-19.ngrok-free.app");
+      // const socket = io("http://localhost:3001");
       // console.log("io ready");
       // socket.on("connect", () => {
       //   console.log("onconnect", socket.id);
-      //   setInterval(() => {
-      //     const time = new Date().getTime();
-      //     console.log({ time });
-      //     socket.emit("c:move", time);
-      //   }, 500);
+      //   socket.emit("message", {
+      //     demo: "socket",
+      //   });
+      //   // setInterval(() => {
+      //   //   socket.emit("c:inscription", {});
+      //   // }, 500);
       // });
-      // socket.on("s:status", function (msg) {
-      //   console.log("s:status", msg);
+      // socket.on("message", function (msg) {
+      //   console.log("new message from server", msg);
       // });
     </script>
   </body>
