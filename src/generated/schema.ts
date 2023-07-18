@@ -258,6 +258,7 @@ export type CursorOrdering = 'ASC' | 'DESC'
 /** columns and relationships of "dutch_auction" */
 export interface DutchAuction {
     auctionId: Scalars['uuid']
+    collection: (Scalars['String'] | null)
     createdAt: (Scalars['timestamptz'] | null)
     currentPrice: Scalars['Int']
     decreaseAmount: Scalars['Int']
@@ -270,7 +271,7 @@ export interface DutchAuction {
     id: Scalars['uuid']
     initialPrice: Scalars['Int']
     inscriptionId: Scalars['String']
-    ordinalsAddress: (Scalars['String'] | null)
+    ownerOrdinalsAddress: (Scalars['String'] | null)
     reservePrice: Scalars['Int']
     scheduledISODate: (Scalars['timestamptz'] | null)
     secondsBetweenEachDecrease: Scalars['Int']
@@ -278,6 +279,8 @@ export interface DutchAuction {
     status: AuctionStatusEnum
     txid: (Scalars['String'] | null)
     updatedAt: (Scalars['timestamptz'] | null)
+    utxoCreatedAt: (Scalars['Int'] | null)
+    utxoNum: (Scalars['String'] | null)
     vout: Scalars['Int']
     __typename: 'DutchAuction'
 }
@@ -316,6 +319,7 @@ export interface DutchAuctionAvgFields {
     reservePrice: (Scalars['Float'] | null)
     secondsBetweenEachDecrease: (Scalars['Float'] | null)
     startTime: (Scalars['Float'] | null)
+    utxoCreatedAt: (Scalars['Float'] | null)
     vout: (Scalars['Float'] | null)
     __typename: 'DutchAuctionAvgFields'
 }
@@ -328,19 +332,22 @@ export type DutchAuctionConstraint = 'dutch_auction_id_key' | 'dutch_auction_pke
 /** aggregate max on columns */
 export interface DutchAuctionMaxFields {
     auctionId: (Scalars['uuid'] | null)
+    collection: (Scalars['String'] | null)
     createdAt: (Scalars['timestamptz'] | null)
     currentPrice: (Scalars['Int'] | null)
     decreaseAmount: (Scalars['Int'] | null)
     id: (Scalars['uuid'] | null)
     initialPrice: (Scalars['Int'] | null)
     inscriptionId: (Scalars['String'] | null)
-    ordinalsAddress: (Scalars['String'] | null)
+    ownerOrdinalsAddress: (Scalars['String'] | null)
     reservePrice: (Scalars['Int'] | null)
     scheduledISODate: (Scalars['timestamptz'] | null)
     secondsBetweenEachDecrease: (Scalars['Int'] | null)
     startTime: (Scalars['bigint'] | null)
     txid: (Scalars['String'] | null)
     updatedAt: (Scalars['timestamptz'] | null)
+    utxoCreatedAt: (Scalars['Int'] | null)
+    utxoNum: (Scalars['String'] | null)
     vout: (Scalars['Int'] | null)
     __typename: 'DutchAuctionMaxFields'
 }
@@ -349,19 +356,22 @@ export interface DutchAuctionMaxFields {
 /** aggregate min on columns */
 export interface DutchAuctionMinFields {
     auctionId: (Scalars['uuid'] | null)
+    collection: (Scalars['String'] | null)
     createdAt: (Scalars['timestamptz'] | null)
     currentPrice: (Scalars['Int'] | null)
     decreaseAmount: (Scalars['Int'] | null)
     id: (Scalars['uuid'] | null)
     initialPrice: (Scalars['Int'] | null)
     inscriptionId: (Scalars['String'] | null)
-    ordinalsAddress: (Scalars['String'] | null)
+    ownerOrdinalsAddress: (Scalars['String'] | null)
     reservePrice: (Scalars['Int'] | null)
     scheduledISODate: (Scalars['timestamptz'] | null)
     secondsBetweenEachDecrease: (Scalars['Int'] | null)
     startTime: (Scalars['bigint'] | null)
     txid: (Scalars['String'] | null)
     updatedAt: (Scalars['timestamptz'] | null)
+    utxoCreatedAt: (Scalars['Int'] | null)
+    utxoNum: (Scalars['String'] | null)
     vout: (Scalars['Int'] | null)
     __typename: 'DutchAuctionMinFields'
 }
@@ -378,7 +388,7 @@ export interface DutchAuctionMutationResponse {
 
 
 /** select columns of table "dutch_auction" */
-export type DutchAuctionSelectColumn = 'auctionId' | 'createdAt' | 'currentPrice' | 'decreaseAmount' | 'id' | 'initialPrice' | 'inscriptionId' | 'ordinalsAddress' | 'reservePrice' | 'scheduledISODate' | 'secondsBetweenEachDecrease' | 'startTime' | 'status' | 'txid' | 'updatedAt' | 'vout'
+export type DutchAuctionSelectColumn = 'auctionId' | 'collection' | 'createdAt' | 'currentPrice' | 'decreaseAmount' | 'id' | 'initialPrice' | 'inscriptionId' | 'ownerOrdinalsAddress' | 'reservePrice' | 'scheduledISODate' | 'secondsBetweenEachDecrease' | 'startTime' | 'status' | 'txid' | 'updatedAt' | 'utxoCreatedAt' | 'utxoNum' | 'vout'
 
 
 /** aggregate stddev on columns */
@@ -389,6 +399,7 @@ export interface DutchAuctionStddevFields {
     reservePrice: (Scalars['Float'] | null)
     secondsBetweenEachDecrease: (Scalars['Float'] | null)
     startTime: (Scalars['Float'] | null)
+    utxoCreatedAt: (Scalars['Float'] | null)
     vout: (Scalars['Float'] | null)
     __typename: 'DutchAuctionStddevFields'
 }
@@ -402,6 +413,7 @@ export interface DutchAuctionStddevPopFields {
     reservePrice: (Scalars['Float'] | null)
     secondsBetweenEachDecrease: (Scalars['Float'] | null)
     startTime: (Scalars['Float'] | null)
+    utxoCreatedAt: (Scalars['Float'] | null)
     vout: (Scalars['Float'] | null)
     __typename: 'DutchAuctionStddevPopFields'
 }
@@ -415,6 +427,7 @@ export interface DutchAuctionStddevSampFields {
     reservePrice: (Scalars['Float'] | null)
     secondsBetweenEachDecrease: (Scalars['Float'] | null)
     startTime: (Scalars['Float'] | null)
+    utxoCreatedAt: (Scalars['Float'] | null)
     vout: (Scalars['Float'] | null)
     __typename: 'DutchAuctionStddevSampFields'
 }
@@ -428,13 +441,14 @@ export interface DutchAuctionSumFields {
     reservePrice: (Scalars['Int'] | null)
     secondsBetweenEachDecrease: (Scalars['Int'] | null)
     startTime: (Scalars['bigint'] | null)
+    utxoCreatedAt: (Scalars['Int'] | null)
     vout: (Scalars['Int'] | null)
     __typename: 'DutchAuctionSumFields'
 }
 
 
 /** update columns of table "dutch_auction" */
-export type DutchAuctionUpdateColumn = 'auctionId' | 'createdAt' | 'currentPrice' | 'decreaseAmount' | 'id' | 'initialPrice' | 'inscriptionId' | 'ordinalsAddress' | 'reservePrice' | 'scheduledISODate' | 'secondsBetweenEachDecrease' | 'startTime' | 'status' | 'txid' | 'updatedAt' | 'vout'
+export type DutchAuctionUpdateColumn = 'auctionId' | 'collection' | 'createdAt' | 'currentPrice' | 'decreaseAmount' | 'id' | 'initialPrice' | 'inscriptionId' | 'ownerOrdinalsAddress' | 'reservePrice' | 'scheduledISODate' | 'secondsBetweenEachDecrease' | 'startTime' | 'status' | 'txid' | 'updatedAt' | 'utxoCreatedAt' | 'utxoNum' | 'vout'
 
 
 /** aggregate varPop on columns */
@@ -445,6 +459,7 @@ export interface DutchAuctionVarPopFields {
     reservePrice: (Scalars['Float'] | null)
     secondsBetweenEachDecrease: (Scalars['Float'] | null)
     startTime: (Scalars['Float'] | null)
+    utxoCreatedAt: (Scalars['Float'] | null)
     vout: (Scalars['Float'] | null)
     __typename: 'DutchAuctionVarPopFields'
 }
@@ -458,6 +473,7 @@ export interface DutchAuctionVarSampFields {
     reservePrice: (Scalars['Float'] | null)
     secondsBetweenEachDecrease: (Scalars['Float'] | null)
     startTime: (Scalars['Float'] | null)
+    utxoCreatedAt: (Scalars['Float'] | null)
     vout: (Scalars['Float'] | null)
     __typename: 'DutchAuctionVarSampFields'
 }
@@ -471,6 +487,7 @@ export interface DutchAuctionVarianceFields {
     reservePrice: (Scalars['Float'] | null)
     secondsBetweenEachDecrease: (Scalars['Float'] | null)
     startTime: (Scalars['Float'] | null)
+    utxoCreatedAt: (Scalars['Float'] | null)
     vout: (Scalars['Float'] | null)
     __typename: 'DutchAuctionVarianceFields'
 }
@@ -992,6 +1009,7 @@ export interface BigintComparisonExp {_eq?: (Scalars['bigint'] | null),_gt?: (Sc
 /** columns and relationships of "dutch_auction" */
 export interface DutchAuctionGenqlSelection{
     auctionId?: boolean | number
+    collection?: boolean | number
     createdAt?: boolean | number
     currentPrice?: boolean | number
     decreaseAmount?: boolean | number
@@ -1024,7 +1042,7 @@ export interface DutchAuctionGenqlSelection{
     id?: boolean | number
     initialPrice?: boolean | number
     inscriptionId?: boolean | number
-    ordinalsAddress?: boolean | number
+    ownerOrdinalsAddress?: boolean | number
     reservePrice?: boolean | number
     scheduledISODate?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
@@ -1032,6 +1050,8 @@ export interface DutchAuctionGenqlSelection{
     status?: boolean | number
     txid?: boolean | number
     updatedAt?: boolean | number
+    utxoCreatedAt?: boolean | number
+    utxoNum?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1085,6 +1105,7 @@ export interface DutchAuctionAvgFieldsGenqlSelection{
     reservePrice?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
+    utxoCreatedAt?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1092,37 +1113,40 @@ export interface DutchAuctionAvgFieldsGenqlSelection{
 
 
 /** order by avg() on columns of table "dutch_auction" */
-export interface DutchAuctionAvgOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionAvgOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** Boolean expression to filter rows from the table "dutch_auction". All fields are combined with a logical 'AND'. */
-export interface DutchAuctionBoolExp {_and?: (DutchAuctionBoolExp[] | null),_not?: (DutchAuctionBoolExp | null),_or?: (DutchAuctionBoolExp[] | null),auctionId?: (UuidComparisonExp | null),createdAt?: (TimestamptzComparisonExp | null),currentPrice?: (IntComparisonExp | null),decreaseAmount?: (IntComparisonExp | null),dutch_auction_auction_metadata?: (AuctionMetadataBoolExp | null),dutch_auction_auction_metadataAggregate?: (AuctionMetadataAggregateBoolExp | null),dutch_auction_auction_status?: (AuctionStatusBoolExp | null),id?: (UuidComparisonExp | null),initialPrice?: (IntComparisonExp | null),inscriptionId?: (StringComparisonExp | null),ordinalsAddress?: (StringComparisonExp | null),reservePrice?: (IntComparisonExp | null),scheduledISODate?: (TimestamptzComparisonExp | null),secondsBetweenEachDecrease?: (IntComparisonExp | null),startTime?: (BigintComparisonExp | null),status?: (AuctionStatusEnumComparisonExp | null),txid?: (StringComparisonExp | null),updatedAt?: (TimestamptzComparisonExp | null),vout?: (IntComparisonExp | null)}
+export interface DutchAuctionBoolExp {_and?: (DutchAuctionBoolExp[] | null),_not?: (DutchAuctionBoolExp | null),_or?: (DutchAuctionBoolExp[] | null),auctionId?: (UuidComparisonExp | null),collection?: (StringComparisonExp | null),createdAt?: (TimestamptzComparisonExp | null),currentPrice?: (IntComparisonExp | null),decreaseAmount?: (IntComparisonExp | null),dutch_auction_auction_metadata?: (AuctionMetadataBoolExp | null),dutch_auction_auction_metadataAggregate?: (AuctionMetadataAggregateBoolExp | null),dutch_auction_auction_status?: (AuctionStatusBoolExp | null),id?: (UuidComparisonExp | null),initialPrice?: (IntComparisonExp | null),inscriptionId?: (StringComparisonExp | null),ownerOrdinalsAddress?: (StringComparisonExp | null),reservePrice?: (IntComparisonExp | null),scheduledISODate?: (TimestamptzComparisonExp | null),secondsBetweenEachDecrease?: (IntComparisonExp | null),startTime?: (BigintComparisonExp | null),status?: (AuctionStatusEnumComparisonExp | null),txid?: (StringComparisonExp | null),updatedAt?: (TimestamptzComparisonExp | null),utxoCreatedAt?: (IntComparisonExp | null),utxoNum?: (StringComparisonExp | null),vout?: (IntComparisonExp | null)}
 
 
 /** input type for incrementing numeric columns in table "dutch_auction" */
-export interface DutchAuctionIncInput {currentPrice?: (Scalars['Int'] | null),decreaseAmount?: (Scalars['Int'] | null),initialPrice?: (Scalars['Int'] | null),reservePrice?: (Scalars['Int'] | null),secondsBetweenEachDecrease?: (Scalars['Int'] | null),startTime?: (Scalars['bigint'] | null),vout?: (Scalars['Int'] | null)}
+export interface DutchAuctionIncInput {currentPrice?: (Scalars['Int'] | null),decreaseAmount?: (Scalars['Int'] | null),initialPrice?: (Scalars['Int'] | null),reservePrice?: (Scalars['Int'] | null),secondsBetweenEachDecrease?: (Scalars['Int'] | null),startTime?: (Scalars['bigint'] | null),utxoCreatedAt?: (Scalars['Int'] | null),vout?: (Scalars['Int'] | null)}
 
 
 /** input type for inserting data into table "dutch_auction" */
-export interface DutchAuctionInsertInput {auctionId?: (Scalars['uuid'] | null),createdAt?: (Scalars['timestamptz'] | null),currentPrice?: (Scalars['Int'] | null),decreaseAmount?: (Scalars['Int'] | null),dutch_auction_auction_metadata?: (AuctionMetadataArrRelInsertInput | null),dutch_auction_auction_status?: (AuctionStatusObjRelInsertInput | null),id?: (Scalars['uuid'] | null),initialPrice?: (Scalars['Int'] | null),inscriptionId?: (Scalars['String'] | null),ordinalsAddress?: (Scalars['String'] | null),reservePrice?: (Scalars['Int'] | null),scheduledISODate?: (Scalars['timestamptz'] | null),secondsBetweenEachDecrease?: (Scalars['Int'] | null),startTime?: (Scalars['bigint'] | null),status?: (AuctionStatusEnum | null),txid?: (Scalars['String'] | null),updatedAt?: (Scalars['timestamptz'] | null),vout?: (Scalars['Int'] | null)}
+export interface DutchAuctionInsertInput {auctionId?: (Scalars['uuid'] | null),collection?: (Scalars['String'] | null),createdAt?: (Scalars['timestamptz'] | null),currentPrice?: (Scalars['Int'] | null),decreaseAmount?: (Scalars['Int'] | null),dutch_auction_auction_metadata?: (AuctionMetadataArrRelInsertInput | null),dutch_auction_auction_status?: (AuctionStatusObjRelInsertInput | null),id?: (Scalars['uuid'] | null),initialPrice?: (Scalars['Int'] | null),inscriptionId?: (Scalars['String'] | null),ownerOrdinalsAddress?: (Scalars['String'] | null),reservePrice?: (Scalars['Int'] | null),scheduledISODate?: (Scalars['timestamptz'] | null),secondsBetweenEachDecrease?: (Scalars['Int'] | null),startTime?: (Scalars['bigint'] | null),status?: (AuctionStatusEnum | null),txid?: (Scalars['String'] | null),updatedAt?: (Scalars['timestamptz'] | null),utxoCreatedAt?: (Scalars['Int'] | null),utxoNum?: (Scalars['String'] | null),vout?: (Scalars['Int'] | null)}
 
 
 /** aggregate max on columns */
 export interface DutchAuctionMaxFieldsGenqlSelection{
     auctionId?: boolean | number
+    collection?: boolean | number
     createdAt?: boolean | number
     currentPrice?: boolean | number
     decreaseAmount?: boolean | number
     id?: boolean | number
     initialPrice?: boolean | number
     inscriptionId?: boolean | number
-    ordinalsAddress?: boolean | number
+    ownerOrdinalsAddress?: boolean | number
     reservePrice?: boolean | number
     scheduledISODate?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
     txid?: boolean | number
     updatedAt?: boolean | number
+    utxoCreatedAt?: boolean | number
+    utxoNum?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1130,25 +1154,28 @@ export interface DutchAuctionMaxFieldsGenqlSelection{
 
 
 /** order by max() on columns of table "dutch_auction" */
-export interface DutchAuctionMaxOrderBy {auctionId?: (OrderBy | null),createdAt?: (OrderBy | null),currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),id?: (OrderBy | null),initialPrice?: (OrderBy | null),inscriptionId?: (OrderBy | null),ordinalsAddress?: (OrderBy | null),reservePrice?: (OrderBy | null),scheduledISODate?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),txid?: (OrderBy | null),updatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionMaxOrderBy {auctionId?: (OrderBy | null),collection?: (OrderBy | null),createdAt?: (OrderBy | null),currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),id?: (OrderBy | null),initialPrice?: (OrderBy | null),inscriptionId?: (OrderBy | null),ownerOrdinalsAddress?: (OrderBy | null),reservePrice?: (OrderBy | null),scheduledISODate?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),txid?: (OrderBy | null),updatedAt?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),utxoNum?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** aggregate min on columns */
 export interface DutchAuctionMinFieldsGenqlSelection{
     auctionId?: boolean | number
+    collection?: boolean | number
     createdAt?: boolean | number
     currentPrice?: boolean | number
     decreaseAmount?: boolean | number
     id?: boolean | number
     initialPrice?: boolean | number
     inscriptionId?: boolean | number
-    ordinalsAddress?: boolean | number
+    ownerOrdinalsAddress?: boolean | number
     reservePrice?: boolean | number
     scheduledISODate?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
     txid?: boolean | number
     updatedAt?: boolean | number
+    utxoCreatedAt?: boolean | number
+    utxoNum?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1156,7 +1183,7 @@ export interface DutchAuctionMinFieldsGenqlSelection{
 
 
 /** order by min() on columns of table "dutch_auction" */
-export interface DutchAuctionMinOrderBy {auctionId?: (OrderBy | null),createdAt?: (OrderBy | null),currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),id?: (OrderBy | null),initialPrice?: (OrderBy | null),inscriptionId?: (OrderBy | null),ordinalsAddress?: (OrderBy | null),reservePrice?: (OrderBy | null),scheduledISODate?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),txid?: (OrderBy | null),updatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionMinOrderBy {auctionId?: (OrderBy | null),collection?: (OrderBy | null),createdAt?: (OrderBy | null),currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),id?: (OrderBy | null),initialPrice?: (OrderBy | null),inscriptionId?: (OrderBy | null),ownerOrdinalsAddress?: (OrderBy | null),reservePrice?: (OrderBy | null),scheduledISODate?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),txid?: (OrderBy | null),updatedAt?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),utxoNum?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** response of any mutation on the table "dutch_auction" */
@@ -1181,7 +1208,7 @@ export interface DutchAuctionOnConflict {constraint?: DutchAuctionConstraint,upd
 
 
 /** Ordering options when selecting data from "dutch_auction". */
-export interface DutchAuctionOrderBy {auctionId?: (OrderBy | null),createdAt?: (OrderBy | null),currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),dutch_auction_auction_metadataAggregate?: (AuctionMetadataAggregateOrderBy | null),dutch_auction_auction_status?: (AuctionStatusOrderBy | null),id?: (OrderBy | null),initialPrice?: (OrderBy | null),inscriptionId?: (OrderBy | null),ordinalsAddress?: (OrderBy | null),reservePrice?: (OrderBy | null),scheduledISODate?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),status?: (OrderBy | null),txid?: (OrderBy | null),updatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionOrderBy {auctionId?: (OrderBy | null),collection?: (OrderBy | null),createdAt?: (OrderBy | null),currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),dutch_auction_auction_metadataAggregate?: (AuctionMetadataAggregateOrderBy | null),dutch_auction_auction_status?: (AuctionStatusOrderBy | null),id?: (OrderBy | null),initialPrice?: (OrderBy | null),inscriptionId?: (OrderBy | null),ownerOrdinalsAddress?: (OrderBy | null),reservePrice?: (OrderBy | null),scheduledISODate?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),status?: (OrderBy | null),txid?: (OrderBy | null),updatedAt?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),utxoNum?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** primary key columns input for table: dutch_auction */
@@ -1189,7 +1216,7 @@ export interface DutchAuctionPkColumnsInput {auctionId?: Scalars['uuid']}
 
 
 /** input type for updating data in table "dutch_auction" */
-export interface DutchAuctionSetInput {auctionId?: (Scalars['uuid'] | null),createdAt?: (Scalars['timestamptz'] | null),currentPrice?: (Scalars['Int'] | null),decreaseAmount?: (Scalars['Int'] | null),id?: (Scalars['uuid'] | null),initialPrice?: (Scalars['Int'] | null),inscriptionId?: (Scalars['String'] | null),ordinalsAddress?: (Scalars['String'] | null),reservePrice?: (Scalars['Int'] | null),scheduledISODate?: (Scalars['timestamptz'] | null),secondsBetweenEachDecrease?: (Scalars['Int'] | null),startTime?: (Scalars['bigint'] | null),status?: (AuctionStatusEnum | null),txid?: (Scalars['String'] | null),updatedAt?: (Scalars['timestamptz'] | null),vout?: (Scalars['Int'] | null)}
+export interface DutchAuctionSetInput {auctionId?: (Scalars['uuid'] | null),collection?: (Scalars['String'] | null),createdAt?: (Scalars['timestamptz'] | null),currentPrice?: (Scalars['Int'] | null),decreaseAmount?: (Scalars['Int'] | null),id?: (Scalars['uuid'] | null),initialPrice?: (Scalars['Int'] | null),inscriptionId?: (Scalars['String'] | null),ownerOrdinalsAddress?: (Scalars['String'] | null),reservePrice?: (Scalars['Int'] | null),scheduledISODate?: (Scalars['timestamptz'] | null),secondsBetweenEachDecrease?: (Scalars['Int'] | null),startTime?: (Scalars['bigint'] | null),status?: (AuctionStatusEnum | null),txid?: (Scalars['String'] | null),updatedAt?: (Scalars['timestamptz'] | null),utxoCreatedAt?: (Scalars['Int'] | null),utxoNum?: (Scalars['String'] | null),vout?: (Scalars['Int'] | null)}
 
 
 /** aggregate stddev on columns */
@@ -1200,6 +1227,7 @@ export interface DutchAuctionStddevFieldsGenqlSelection{
     reservePrice?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
+    utxoCreatedAt?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1207,7 +1235,7 @@ export interface DutchAuctionStddevFieldsGenqlSelection{
 
 
 /** order by stddev() on columns of table "dutch_auction" */
-export interface DutchAuctionStddevOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionStddevOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** aggregate stddevPop on columns */
@@ -1218,6 +1246,7 @@ export interface DutchAuctionStddevPopFieldsGenqlSelection{
     reservePrice?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
+    utxoCreatedAt?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1225,7 +1254,7 @@ export interface DutchAuctionStddevPopFieldsGenqlSelection{
 
 
 /** order by stddevPop() on columns of table "dutch_auction" */
-export interface DutchAuctionStddevPopOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionStddevPopOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** aggregate stddevSamp on columns */
@@ -1236,6 +1265,7 @@ export interface DutchAuctionStddevSampFieldsGenqlSelection{
     reservePrice?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
+    utxoCreatedAt?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1243,7 +1273,7 @@ export interface DutchAuctionStddevSampFieldsGenqlSelection{
 
 
 /** order by stddevSamp() on columns of table "dutch_auction" */
-export interface DutchAuctionStddevSampOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionStddevSampOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** Streaming cursor of the table "dutch_auction" */
@@ -1255,7 +1285,7 @@ ordering?: (CursorOrdering | null)}
 
 
 /** Initial value of the column from where the streaming should start */
-export interface DutchAuctionStreamCursorValueInput {auctionId?: (Scalars['uuid'] | null),createdAt?: (Scalars['timestamptz'] | null),currentPrice?: (Scalars['Int'] | null),decreaseAmount?: (Scalars['Int'] | null),id?: (Scalars['uuid'] | null),initialPrice?: (Scalars['Int'] | null),inscriptionId?: (Scalars['String'] | null),ordinalsAddress?: (Scalars['String'] | null),reservePrice?: (Scalars['Int'] | null),scheduledISODate?: (Scalars['timestamptz'] | null),secondsBetweenEachDecrease?: (Scalars['Int'] | null),startTime?: (Scalars['bigint'] | null),status?: (AuctionStatusEnum | null),txid?: (Scalars['String'] | null),updatedAt?: (Scalars['timestamptz'] | null),vout?: (Scalars['Int'] | null)}
+export interface DutchAuctionStreamCursorValueInput {auctionId?: (Scalars['uuid'] | null),collection?: (Scalars['String'] | null),createdAt?: (Scalars['timestamptz'] | null),currentPrice?: (Scalars['Int'] | null),decreaseAmount?: (Scalars['Int'] | null),id?: (Scalars['uuid'] | null),initialPrice?: (Scalars['Int'] | null),inscriptionId?: (Scalars['String'] | null),ownerOrdinalsAddress?: (Scalars['String'] | null),reservePrice?: (Scalars['Int'] | null),scheduledISODate?: (Scalars['timestamptz'] | null),secondsBetweenEachDecrease?: (Scalars['Int'] | null),startTime?: (Scalars['bigint'] | null),status?: (AuctionStatusEnum | null),txid?: (Scalars['String'] | null),updatedAt?: (Scalars['timestamptz'] | null),utxoCreatedAt?: (Scalars['Int'] | null),utxoNum?: (Scalars['String'] | null),vout?: (Scalars['Int'] | null)}
 
 
 /** aggregate sum on columns */
@@ -1266,6 +1296,7 @@ export interface DutchAuctionSumFieldsGenqlSelection{
     reservePrice?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
+    utxoCreatedAt?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1273,7 +1304,7 @@ export interface DutchAuctionSumFieldsGenqlSelection{
 
 
 /** order by sum() on columns of table "dutch_auction" */
-export interface DutchAuctionSumOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionSumOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
 
 export interface DutchAuctionUpdates {
 /** increments the numeric columns with given value of the filtered values */
@@ -1292,6 +1323,7 @@ export interface DutchAuctionVarPopFieldsGenqlSelection{
     reservePrice?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
+    utxoCreatedAt?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1299,7 +1331,7 @@ export interface DutchAuctionVarPopFieldsGenqlSelection{
 
 
 /** order by varPop() on columns of table "dutch_auction" */
-export interface DutchAuctionVarPopOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionVarPopOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** aggregate varSamp on columns */
@@ -1310,6 +1342,7 @@ export interface DutchAuctionVarSampFieldsGenqlSelection{
     reservePrice?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
+    utxoCreatedAt?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1317,7 +1350,7 @@ export interface DutchAuctionVarSampFieldsGenqlSelection{
 
 
 /** order by varSamp() on columns of table "dutch_auction" */
-export interface DutchAuctionVarSampOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionVarSampOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** aggregate variance on columns */
@@ -1328,6 +1361,7 @@ export interface DutchAuctionVarianceFieldsGenqlSelection{
     reservePrice?: boolean | number
     secondsBetweenEachDecrease?: boolean | number
     startTime?: boolean | number
+    utxoCreatedAt?: boolean | number
     vout?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
@@ -1335,7 +1369,7 @@ export interface DutchAuctionVarianceFieldsGenqlSelection{
 
 
 /** order by variance() on columns of table "dutch_auction" */
-export interface DutchAuctionVarianceOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),vout?: (OrderBy | null)}
+export interface DutchAuctionVarianceOrderBy {currentPrice?: (OrderBy | null),decreaseAmount?: (OrderBy | null),initialPrice?: (OrderBy | null),reservePrice?: (OrderBy | null),secondsBetweenEachDecrease?: (OrderBy | null),startTime?: (OrderBy | null),utxoCreatedAt?: (OrderBy | null),vout?: (OrderBy | null)}
 
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -2036,13 +2070,14 @@ export const enumDutchAuctionConstraint = {
 
 export const enumDutchAuctionSelectColumn = {
    auctionId: 'auctionId' as const,
+   collection: 'collection' as const,
    createdAt: 'createdAt' as const,
    currentPrice: 'currentPrice' as const,
    decreaseAmount: 'decreaseAmount' as const,
    id: 'id' as const,
    initialPrice: 'initialPrice' as const,
    inscriptionId: 'inscriptionId' as const,
-   ordinalsAddress: 'ordinalsAddress' as const,
+   ownerOrdinalsAddress: 'ownerOrdinalsAddress' as const,
    reservePrice: 'reservePrice' as const,
    scheduledISODate: 'scheduledISODate' as const,
    secondsBetweenEachDecrease: 'secondsBetweenEachDecrease' as const,
@@ -2050,18 +2085,21 @@ export const enumDutchAuctionSelectColumn = {
    status: 'status' as const,
    txid: 'txid' as const,
    updatedAt: 'updatedAt' as const,
+   utxoCreatedAt: 'utxoCreatedAt' as const,
+   utxoNum: 'utxoNum' as const,
    vout: 'vout' as const
 }
 
 export const enumDutchAuctionUpdateColumn = {
    auctionId: 'auctionId' as const,
+   collection: 'collection' as const,
    createdAt: 'createdAt' as const,
    currentPrice: 'currentPrice' as const,
    decreaseAmount: 'decreaseAmount' as const,
    id: 'id' as const,
    initialPrice: 'initialPrice' as const,
    inscriptionId: 'inscriptionId' as const,
-   ordinalsAddress: 'ordinalsAddress' as const,
+   ownerOrdinalsAddress: 'ownerOrdinalsAddress' as const,
    reservePrice: 'reservePrice' as const,
    scheduledISODate: 'scheduledISODate' as const,
    secondsBetweenEachDecrease: 'secondsBetweenEachDecrease' as const,
@@ -2069,6 +2107,8 @@ export const enumDutchAuctionUpdateColumn = {
    status: 'status' as const,
    txid: 'txid' as const,
    updatedAt: 'updatedAt' as const,
+   utxoCreatedAt: 'utxoCreatedAt' as const,
+   utxoNum: 'utxoNum' as const,
    vout: 'vout' as const
 }
 

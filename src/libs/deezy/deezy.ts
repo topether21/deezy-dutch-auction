@@ -1,5 +1,6 @@
 import axios from "axios";
-import { MEMPOOL_API_URL, TURBO_API } from "./config";
+import { MEMPOOL_API_URL, TURBO_API } from "../../config";
+import { Inscription } from "./deezy.types";
 
 export const parseOutpoint = (outpoint: string) => {
   const rawVout = outpoint.slice(-8);
@@ -26,7 +27,9 @@ export const getOutpoint = async (inscriptionId: string) => {
   return undefined;
 };
 
-export const getInscription = async (inscriptionId: string) => {
+export const getInscription = async (
+  inscriptionId: string
+): Promise<Inscription> => {
   let collection;
 
   const { data: inscriptionData } = await axios.get(

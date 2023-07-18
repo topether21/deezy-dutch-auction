@@ -714,6 +714,7 @@ columns and relationships of "dutch_auction"
 """
 type DutchAuction {
   auctionId: uuid!
+  collection: String
   createdAt: timestamptz
   currentPrice: Int!
   decreaseAmount: Int!
@@ -759,7 +760,7 @@ type DutchAuction {
   id: uuid!
   initialPrice: Int!
   inscriptionId: String!
-  ordinalsAddress: String
+  ownerOrdinalsAddress: String
   reservePrice: Int!
   scheduledISODate: timestamptz
   secondsBetweenEachDecrease: Int!
@@ -767,6 +768,8 @@ type DutchAuction {
   status: AuctionStatusEnum!
   txid: String
   updatedAt: timestamptz
+  utxoCreatedAt: Int
+  utxoNum: String
   vout: Int!
 }
 
@@ -834,6 +837,7 @@ type DutchAuctionAvgFields {
   reservePrice: Float
   secondsBetweenEachDecrease: Float
   startTime: Float
+  utxoCreatedAt: Float
   vout: Float
 }
 
@@ -847,6 +851,7 @@ input DutchAuctionAvgOrderBy {
   reservePrice: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
+  utxoCreatedAt: OrderBy
   vout: OrderBy
 }
 
@@ -858,6 +863,7 @@ input DutchAuctionBoolExp {
   _not: DutchAuctionBoolExp
   _or: [DutchAuctionBoolExp!]
   auctionId: UuidComparisonExp
+  collection: StringComparisonExp
   createdAt: TimestamptzComparisonExp
   currentPrice: IntComparisonExp
   decreaseAmount: IntComparisonExp
@@ -867,7 +873,7 @@ input DutchAuctionBoolExp {
   id: UuidComparisonExp
   initialPrice: IntComparisonExp
   inscriptionId: StringComparisonExp
-  ordinalsAddress: StringComparisonExp
+  ownerOrdinalsAddress: StringComparisonExp
   reservePrice: IntComparisonExp
   scheduledISODate: TimestamptzComparisonExp
   secondsBetweenEachDecrease: IntComparisonExp
@@ -875,6 +881,8 @@ input DutchAuctionBoolExp {
   status: AuctionStatusEnumComparisonExp
   txid: StringComparisonExp
   updatedAt: TimestamptzComparisonExp
+  utxoCreatedAt: IntComparisonExp
+  utxoNum: StringComparisonExp
   vout: IntComparisonExp
 }
 
@@ -903,6 +911,7 @@ input DutchAuctionIncInput {
   reservePrice: Int
   secondsBetweenEachDecrease: Int
   startTime: bigint
+  utxoCreatedAt: Int
   vout: Int
 }
 
@@ -911,6 +920,7 @@ input type for inserting data into table "dutch_auction"
 """
 input DutchAuctionInsertInput {
   auctionId: uuid
+  collection: String
   createdAt: timestamptz
   currentPrice: Int
   decreaseAmount: Int
@@ -919,7 +929,7 @@ input DutchAuctionInsertInput {
   id: uuid
   initialPrice: Int
   inscriptionId: String
-  ordinalsAddress: String
+  ownerOrdinalsAddress: String
   reservePrice: Int
   scheduledISODate: timestamptz
   secondsBetweenEachDecrease: Int
@@ -927,25 +937,30 @@ input DutchAuctionInsertInput {
   status: AuctionStatusEnum
   txid: String
   updatedAt: timestamptz
+  utxoCreatedAt: Int
+  utxoNum: String
   vout: Int
 }
 
 """aggregate max on columns"""
 type DutchAuctionMaxFields {
   auctionId: uuid
+  collection: String
   createdAt: timestamptz
   currentPrice: Int
   decreaseAmount: Int
   id: uuid
   initialPrice: Int
   inscriptionId: String
-  ordinalsAddress: String
+  ownerOrdinalsAddress: String
   reservePrice: Int
   scheduledISODate: timestamptz
   secondsBetweenEachDecrease: Int
   startTime: bigint
   txid: String
   updatedAt: timestamptz
+  utxoCreatedAt: Int
+  utxoNum: String
   vout: Int
 }
 
@@ -954,38 +969,44 @@ order by max() on columns of table "dutch_auction"
 """
 input DutchAuctionMaxOrderBy {
   auctionId: OrderBy
+  collection: OrderBy
   createdAt: OrderBy
   currentPrice: OrderBy
   decreaseAmount: OrderBy
   id: OrderBy
   initialPrice: OrderBy
   inscriptionId: OrderBy
-  ordinalsAddress: OrderBy
+  ownerOrdinalsAddress: OrderBy
   reservePrice: OrderBy
   scheduledISODate: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
   txid: OrderBy
   updatedAt: OrderBy
+  utxoCreatedAt: OrderBy
+  utxoNum: OrderBy
   vout: OrderBy
 }
 
 """aggregate min on columns"""
 type DutchAuctionMinFields {
   auctionId: uuid
+  collection: String
   createdAt: timestamptz
   currentPrice: Int
   decreaseAmount: Int
   id: uuid
   initialPrice: Int
   inscriptionId: String
-  ordinalsAddress: String
+  ownerOrdinalsAddress: String
   reservePrice: Int
   scheduledISODate: timestamptz
   secondsBetweenEachDecrease: Int
   startTime: bigint
   txid: String
   updatedAt: timestamptz
+  utxoCreatedAt: Int
+  utxoNum: String
   vout: Int
 }
 
@@ -994,19 +1015,22 @@ order by min() on columns of table "dutch_auction"
 """
 input DutchAuctionMinOrderBy {
   auctionId: OrderBy
+  collection: OrderBy
   createdAt: OrderBy
   currentPrice: OrderBy
   decreaseAmount: OrderBy
   id: OrderBy
   initialPrice: OrderBy
   inscriptionId: OrderBy
-  ordinalsAddress: OrderBy
+  ownerOrdinalsAddress: OrderBy
   reservePrice: OrderBy
   scheduledISODate: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
   txid: OrderBy
   updatedAt: OrderBy
+  utxoCreatedAt: OrderBy
+  utxoNum: OrderBy
   vout: OrderBy
 }
 
@@ -1043,6 +1067,7 @@ input DutchAuctionOnConflict {
 """Ordering options when selecting data from "dutch_auction"."""
 input DutchAuctionOrderBy {
   auctionId: OrderBy
+  collection: OrderBy
   createdAt: OrderBy
   currentPrice: OrderBy
   decreaseAmount: OrderBy
@@ -1051,7 +1076,7 @@ input DutchAuctionOrderBy {
   id: OrderBy
   initialPrice: OrderBy
   inscriptionId: OrderBy
-  ordinalsAddress: OrderBy
+  ownerOrdinalsAddress: OrderBy
   reservePrice: OrderBy
   scheduledISODate: OrderBy
   secondsBetweenEachDecrease: OrderBy
@@ -1059,6 +1084,8 @@ input DutchAuctionOrderBy {
   status: OrderBy
   txid: OrderBy
   updatedAt: OrderBy
+  utxoCreatedAt: OrderBy
+  utxoNum: OrderBy
   vout: OrderBy
 }
 
@@ -1073,6 +1100,9 @@ select columns of table "dutch_auction"
 enum DutchAuctionSelectColumn {
   """column name"""
   auctionId
+
+  """column name"""
+  collection
 
   """column name"""
   createdAt
@@ -1093,7 +1123,7 @@ enum DutchAuctionSelectColumn {
   inscriptionId
 
   """column name"""
-  ordinalsAddress
+  ownerOrdinalsAddress
 
   """column name"""
   reservePrice
@@ -1117,6 +1147,12 @@ enum DutchAuctionSelectColumn {
   updatedAt
 
   """column name"""
+  utxoCreatedAt
+
+  """column name"""
+  utxoNum
+
+  """column name"""
   vout
 }
 
@@ -1125,13 +1161,14 @@ input type for updating data in table "dutch_auction"
 """
 input DutchAuctionSetInput {
   auctionId: uuid
+  collection: String
   createdAt: timestamptz
   currentPrice: Int
   decreaseAmount: Int
   id: uuid
   initialPrice: Int
   inscriptionId: String
-  ordinalsAddress: String
+  ownerOrdinalsAddress: String
   reservePrice: Int
   scheduledISODate: timestamptz
   secondsBetweenEachDecrease: Int
@@ -1139,6 +1176,8 @@ input DutchAuctionSetInput {
   status: AuctionStatusEnum
   txid: String
   updatedAt: timestamptz
+  utxoCreatedAt: Int
+  utxoNum: String
   vout: Int
 }
 
@@ -1150,6 +1189,7 @@ type DutchAuctionStddevFields {
   reservePrice: Float
   secondsBetweenEachDecrease: Float
   startTime: Float
+  utxoCreatedAt: Float
   vout: Float
 }
 
@@ -1163,6 +1203,7 @@ input DutchAuctionStddevOrderBy {
   reservePrice: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
+  utxoCreatedAt: OrderBy
   vout: OrderBy
 }
 
@@ -1174,6 +1215,7 @@ type DutchAuctionStddevPopFields {
   reservePrice: Float
   secondsBetweenEachDecrease: Float
   startTime: Float
+  utxoCreatedAt: Float
   vout: Float
 }
 
@@ -1187,6 +1229,7 @@ input DutchAuctionStddevPopOrderBy {
   reservePrice: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
+  utxoCreatedAt: OrderBy
   vout: OrderBy
 }
 
@@ -1198,6 +1241,7 @@ type DutchAuctionStddevSampFields {
   reservePrice: Float
   secondsBetweenEachDecrease: Float
   startTime: Float
+  utxoCreatedAt: Float
   vout: Float
 }
 
@@ -1211,6 +1255,7 @@ input DutchAuctionStddevSampOrderBy {
   reservePrice: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
+  utxoCreatedAt: OrderBy
   vout: OrderBy
 }
 
@@ -1228,13 +1273,14 @@ input DutchAuctionStreamCursorInput {
 """Initial value of the column from where the streaming should start"""
 input DutchAuctionStreamCursorValueInput {
   auctionId: uuid
+  collection: String
   createdAt: timestamptz
   currentPrice: Int
   decreaseAmount: Int
   id: uuid
   initialPrice: Int
   inscriptionId: String
-  ordinalsAddress: String
+  ownerOrdinalsAddress: String
   reservePrice: Int
   scheduledISODate: timestamptz
   secondsBetweenEachDecrease: Int
@@ -1242,6 +1288,8 @@ input DutchAuctionStreamCursorValueInput {
   status: AuctionStatusEnum
   txid: String
   updatedAt: timestamptz
+  utxoCreatedAt: Int
+  utxoNum: String
   vout: Int
 }
 
@@ -1253,6 +1301,7 @@ type DutchAuctionSumFields {
   reservePrice: Int
   secondsBetweenEachDecrease: Int
   startTime: bigint
+  utxoCreatedAt: Int
   vout: Int
 }
 
@@ -1266,6 +1315,7 @@ input DutchAuctionSumOrderBy {
   reservePrice: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
+  utxoCreatedAt: OrderBy
   vout: OrderBy
 }
 
@@ -1275,6 +1325,9 @@ update columns of table "dutch_auction"
 enum DutchAuctionUpdateColumn {
   """column name"""
   auctionId
+
+  """column name"""
+  collection
 
   """column name"""
   createdAt
@@ -1295,7 +1348,7 @@ enum DutchAuctionUpdateColumn {
   inscriptionId
 
   """column name"""
-  ordinalsAddress
+  ownerOrdinalsAddress
 
   """column name"""
   reservePrice
@@ -1317,6 +1370,12 @@ enum DutchAuctionUpdateColumn {
 
   """column name"""
   updatedAt
+
+  """column name"""
+  utxoCreatedAt
+
+  """column name"""
+  utxoNum
 
   """column name"""
   vout
@@ -1341,6 +1400,7 @@ type DutchAuctionVarPopFields {
   reservePrice: Float
   secondsBetweenEachDecrease: Float
   startTime: Float
+  utxoCreatedAt: Float
   vout: Float
 }
 
@@ -1354,6 +1414,7 @@ input DutchAuctionVarPopOrderBy {
   reservePrice: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
+  utxoCreatedAt: OrderBy
   vout: OrderBy
 }
 
@@ -1365,6 +1426,7 @@ type DutchAuctionVarSampFields {
   reservePrice: Float
   secondsBetweenEachDecrease: Float
   startTime: Float
+  utxoCreatedAt: Float
   vout: Float
 }
 
@@ -1378,6 +1440,7 @@ input DutchAuctionVarSampOrderBy {
   reservePrice: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
+  utxoCreatedAt: OrderBy
   vout: OrderBy
 }
 
@@ -1389,6 +1452,7 @@ type DutchAuctionVarianceFields {
   reservePrice: Float
   secondsBetweenEachDecrease: Float
   startTime: Float
+  utxoCreatedAt: Float
   vout: Float
 }
 
@@ -1402,6 +1466,7 @@ input DutchAuctionVarianceOrderBy {
   reservePrice: OrderBy
   secondsBetweenEachDecrease: OrderBy
   startTime: OrderBy
+  utxoCreatedAt: OrderBy
   vout: OrderBy
 }
 

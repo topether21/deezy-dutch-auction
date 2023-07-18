@@ -1088,6 +1088,9 @@ export default {
             "auctionId": [
                 117
             ],
+            "collection": [
+                109
+            ],
             "createdAt": [
                 116
             ],
@@ -1153,7 +1156,7 @@ export default {
             "inscriptionId": [
                 109
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 109
             ],
             "reservePrice": [
@@ -1176,6 +1179,12 @@ export default {
             ],
             "updatedAt": [
                 116
+            ],
+            "utxoCreatedAt": [
+                106
+            ],
+            "utxoNum": [
+                109
             ],
             "vout": [
                 106
@@ -1318,6 +1327,9 @@ export default {
             "startTime": [
                 105
             ],
+            "utxoCreatedAt": [
+                105
+            ],
             "vout": [
                 105
             ],
@@ -1344,6 +1356,9 @@ export default {
             "startTime": [
                 108
             ],
+            "utxoCreatedAt": [
+                108
+            ],
             "vout": [
                 108
             ],
@@ -1363,6 +1378,9 @@ export default {
             ],
             "auctionId": [
                 112
+            ],
+            "collection": [
+                110
             ],
             "createdAt": [
                 111
@@ -1391,7 +1409,7 @@ export default {
             "inscriptionId": [
                 110
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 110
             ],
             "reservePrice": [
@@ -1414,6 +1432,12 @@ export default {
             ],
             "updatedAt": [
                 111
+            ],
+            "utxoCreatedAt": [
+                107
+            ],
+            "utxoNum": [
+                110
             ],
             "vout": [
                 107
@@ -1442,6 +1466,9 @@ export default {
             "startTime": [
                 114
             ],
+            "utxoCreatedAt": [
+                106
+            ],
             "vout": [
                 106
             ],
@@ -1452,6 +1479,9 @@ export default {
         "DutchAuctionInsertInput": {
             "auctionId": [
                 117
+            ],
+            "collection": [
+                109
             ],
             "createdAt": [
                 116
@@ -1477,7 +1507,7 @@ export default {
             "inscriptionId": [
                 109
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 109
             ],
             "reservePrice": [
@@ -1501,6 +1531,12 @@ export default {
             "updatedAt": [
                 116
             ],
+            "utxoCreatedAt": [
+                106
+            ],
+            "utxoNum": [
+                109
+            ],
             "vout": [
                 106
             ],
@@ -1511,6 +1547,9 @@ export default {
         "DutchAuctionMaxFields": {
             "auctionId": [
                 117
+            ],
+            "collection": [
+                109
             ],
             "createdAt": [
                 116
@@ -1530,7 +1569,7 @@ export default {
             "inscriptionId": [
                 109
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 109
             ],
             "reservePrice": [
@@ -1551,6 +1590,12 @@ export default {
             "updatedAt": [
                 116
             ],
+            "utxoCreatedAt": [
+                106
+            ],
+            "utxoNum": [
+                109
+            ],
             "vout": [
                 106
             ],
@@ -1560,6 +1605,9 @@ export default {
         },
         "DutchAuctionMaxOrderBy": {
             "auctionId": [
+                108
+            ],
+            "collection": [
                 108
             ],
             "createdAt": [
@@ -1580,7 +1628,7 @@ export default {
             "inscriptionId": [
                 108
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 108
             ],
             "reservePrice": [
@@ -1599,6 +1647,12 @@ export default {
                 108
             ],
             "updatedAt": [
+                108
+            ],
+            "utxoCreatedAt": [
+                108
+            ],
+            "utxoNum": [
                 108
             ],
             "vout": [
@@ -1612,6 +1666,9 @@ export default {
             "auctionId": [
                 117
             ],
+            "collection": [
+                109
+            ],
             "createdAt": [
                 116
             ],
@@ -1630,7 +1687,7 @@ export default {
             "inscriptionId": [
                 109
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 109
             ],
             "reservePrice": [
@@ -1651,6 +1708,12 @@ export default {
             "updatedAt": [
                 116
             ],
+            "utxoCreatedAt": [
+                106
+            ],
+            "utxoNum": [
+                109
+            ],
             "vout": [
                 106
             ],
@@ -1660,6 +1723,9 @@ export default {
         },
         "DutchAuctionMinOrderBy": {
             "auctionId": [
+                108
+            ],
+            "collection": [
                 108
             ],
             "createdAt": [
@@ -1680,7 +1746,7 @@ export default {
             "inscriptionId": [
                 108
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 108
             ],
             "reservePrice": [
@@ -1699,6 +1765,12 @@ export default {
                 108
             ],
             "updatedAt": [
+                108
+            ],
+            "utxoCreatedAt": [
+                108
+            ],
+            "utxoNum": [
                 108
             ],
             "vout": [
@@ -1748,6 +1820,9 @@ export default {
             "auctionId": [
                 108
             ],
+            "collection": [
+                108
+            ],
             "createdAt": [
                 108
             ],
@@ -1772,7 +1847,7 @@ export default {
             "inscriptionId": [
                 108
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 108
             ],
             "reservePrice": [
@@ -1794,6 +1869,12 @@ export default {
                 108
             ],
             "updatedAt": [
+                108
+            ],
+            "utxoCreatedAt": [
+                108
+            ],
+            "utxoNum": [
                 108
             ],
             "vout": [
@@ -1816,6 +1897,9 @@ export default {
             "auctionId": [
                 117
             ],
+            "collection": [
+                109
+            ],
             "createdAt": [
                 116
             ],
@@ -1834,7 +1918,7 @@ export default {
             "inscriptionId": [
                 109
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 109
             ],
             "reservePrice": [
@@ -1857,6 +1941,12 @@ export default {
             ],
             "updatedAt": [
                 116
+            ],
+            "utxoCreatedAt": [
+                106
+            ],
+            "utxoNum": [
+                109
             ],
             "vout": [
                 106
@@ -1882,6 +1972,9 @@ export default {
                 105
             ],
             "startTime": [
+                105
+            ],
+            "utxoCreatedAt": [
                 105
             ],
             "vout": [
@@ -1910,6 +2003,9 @@ export default {
             "startTime": [
                 108
             ],
+            "utxoCreatedAt": [
+                108
+            ],
             "vout": [
                 108
             ],
@@ -1934,6 +2030,9 @@ export default {
                 105
             ],
             "startTime": [
+                105
+            ],
+            "utxoCreatedAt": [
                 105
             ],
             "vout": [
@@ -1962,6 +2061,9 @@ export default {
             "startTime": [
                 108
             ],
+            "utxoCreatedAt": [
+                108
+            ],
             "vout": [
                 108
             ],
@@ -1986,6 +2088,9 @@ export default {
                 105
             ],
             "startTime": [
+                105
+            ],
+            "utxoCreatedAt": [
                 105
             ],
             "vout": [
@@ -2014,6 +2119,9 @@ export default {
             "startTime": [
                 108
             ],
+            "utxoCreatedAt": [
+                108
+            ],
             "vout": [
                 108
             ],
@@ -2036,6 +2144,9 @@ export default {
             "auctionId": [
                 117
             ],
+            "collection": [
+                109
+            ],
             "createdAt": [
                 116
             ],
@@ -2054,7 +2165,7 @@ export default {
             "inscriptionId": [
                 109
             ],
-            "ordinalsAddress": [
+            "ownerOrdinalsAddress": [
                 109
             ],
             "reservePrice": [
@@ -2077,6 +2188,12 @@ export default {
             ],
             "updatedAt": [
                 116
+            ],
+            "utxoCreatedAt": [
+                106
+            ],
+            "utxoNum": [
+                109
             ],
             "vout": [
                 106
@@ -2104,6 +2221,9 @@ export default {
             "startTime": [
                 114
             ],
+            "utxoCreatedAt": [
+                106
+            ],
             "vout": [
                 106
             ],
@@ -2128,6 +2248,9 @@ export default {
                 108
             ],
             "startTime": [
+                108
+            ],
+            "utxoCreatedAt": [
                 108
             ],
             "vout": [
@@ -2171,6 +2294,9 @@ export default {
             "startTime": [
                 105
             ],
+            "utxoCreatedAt": [
+                105
+            ],
             "vout": [
                 105
             ],
@@ -2195,6 +2321,9 @@ export default {
                 108
             ],
             "startTime": [
+                108
+            ],
+            "utxoCreatedAt": [
                 108
             ],
             "vout": [
@@ -2223,6 +2352,9 @@ export default {
             "startTime": [
                 105
             ],
+            "utxoCreatedAt": [
+                105
+            ],
             "vout": [
                 105
             ],
@@ -2247,6 +2379,9 @@ export default {
                 108
             ],
             "startTime": [
+                108
+            ],
+            "utxoCreatedAt": [
                 108
             ],
             "vout": [
@@ -2275,6 +2410,9 @@ export default {
             "startTime": [
                 105
             ],
+            "utxoCreatedAt": [
+                105
+            ],
             "vout": [
                 105
             ],
@@ -2299,6 +2437,9 @@ export default {
                 108
             ],
             "startTime": [
+                108
+            ],
+            "utxoCreatedAt": [
                 108
             ],
             "vout": [

@@ -1,14 +1,16 @@
 import * as WebSocket from "ws";
 import { createClient as createWsClient } from "graphql-ws";
+// import { writeFileSync } from "fs";
 
 import {
   DutchAuction,
   everything,
   generateSubscriptionOp,
 } from "./../../generated";
-import { print } from "./../../utils";
+import { isFulfilled, print } from "./../../utils";
 import { parseAuction } from "./../../parse";
-import { getInscription } from "./../../deezy";
+import { getInscription } from "../deezy/deezy";
+import { serialize, ServerCache } from "./../../cache";
 
 class WebSocketImpl extends WebSocket {
   constructor(address: string, protocols: string) {
@@ -38,7 +40,7 @@ const { query, variables } = generateSubscriptionOp({
   dutchAuctionStream: {
     ...auctionAttributes,
     __args: {
-      batchSize: 5,
+      batchSize: 10,
       cursor: [
         {
           ordering: "ASC",
@@ -51,29 +53,18 @@ const { query, variables } = generateSubscriptionOp({
   },
 });
 
-(async () => {
-  client.subscribe(
+export const subscribeToAuctions = async (db: ServerCache) => {
+  return client.subscribe(
     { query, variables },
     {
       next: async (response) => {
         console.log("new data");
-        // as dutchAuction;;
         const data = (
           response.data.dutchAuctionStream as Partial<DutchAuction[]>
-        )
-          .map((a) => parseAuction(a))
-          .slice(0, 1);
-        console.log("------>", data.length);
-        print(
-          await Promise.allSettled(
-            data.map(async (a) => await getInscription(a.inscriptionId))
-          )
-        );
+        ).map((a) => parseAuction(a));
       },
       error: console.error,
       complete: () => console.log("finished"),
     }
   );
-})();
-
-export { client };
+};

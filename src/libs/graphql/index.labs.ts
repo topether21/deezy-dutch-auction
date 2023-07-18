@@ -1,13 +1,16 @@
 import * as WebSocket from "ws";
 import { createClient as createWsClient } from "graphql-ws";
+// import { writeFileSync } from "fs";
 
 import {
   DutchAuction,
   everything,
   generateSubscriptionOp,
 } from "./../../generated";
-import { print } from "./../../utils";
+import { isFulfilled, print } from "./../../utils";
 import { parseAuction } from "./../../parse";
+import { getInscription } from "../deezy/deezy";
+import { serialize, ServerCache } from "./../../cache";
 
 class WebSocketImpl extends WebSocket {
   constructor(address: string, protocols: string) {
@@ -37,12 +40,12 @@ const { query, variables } = generateSubscriptionOp({
   dutchAuctionStream: {
     ...auctionAttributes,
     __args: {
-      batchSize: 5,
+      batchSize: 10,
       cursor: [
         {
-          ordering: "DESC",
+          ordering: "ASC",
           initialValue: {
-            currentPrice: 100,
+            updatedAt: new Date(0).toISOString(),
           },
         },
       ],
@@ -50,21 +53,42 @@ const { query, variables } = generateSubscriptionOp({
   },
 });
 
-client.subscribe(
-  { query, variables },
-  {
-    next: (response) => {
-      console.log("new data");
-      // as dutchAuction;;
-      const data = (
-        response.data.dutchAuctionStream as Partial<DutchAuction[]>
-      ).map((a) => parseAuction(a));
-      console.log("------>", data.length);
-      print(data.map((a) => a.id));
-    },
-    error: console.error,
-    complete: () => console.log("finished"),
-  }
-);
+export const subscribeToAuctions = async (db: ServerCache) => {
+  return client.subscribe(
+    { query, variables },
+    {
+      next: async (response) => {
+        console.log("new data");
+        const data = (
+          response.data.dutchAuctionStream as Partial<DutchAuction[]>
+        ).map((a) => parseAuction(a));
 
-export { client };
+        const inscriptions = (
+          await Promise.allSettled(
+            data.map(async (a) => await getInscription(a.inscriptionId))
+          )
+        )
+          .filter(isFulfilled)
+          .map((item) => item.value);
+
+        const coverAuctions = inscriptions.reduce(
+          (acc, curr) =>
+            acc.concat([
+              curr.inscriptionId,
+              serialize({
+                inscriptionId: curr.inscriptionId,
+                num: curr.num,
+                content_type: curr.content_type,
+                date: "", // TODO
+              }),
+            ]),
+          [] as [string, string][]
+        );
+
+        await db.addDutchAuctions(coverAuctions);
+      },
+      error: console.error,
+      complete: () => console.log("finished"),
+    }
+  );
+};

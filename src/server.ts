@@ -8,8 +8,9 @@ import { Request, Response } from "express";
 import { createClient } from "redis";
 import { createAdapter } from "@socket.io/redis-adapter";
 import app from "./app";
-import { CONNECTION, DISCONNECT } from "./messages";
-import "./libs/graphql";
+import { CONNECTION, DISCONNECT } from "./config/messages";
+import { subscribeToAuctions } from "./libs/graphql";
+import { ServerCache } from "./cache";
 
 const PORT = parseInt(process.env.PORT || "3000");
 app.set("port", PORT);
@@ -48,6 +49,10 @@ app.get("/", (req: Request, res: Response) => {
 (async () => {
   await Promise.all([pubClient.connect(), subClient.connect(), db.connect()]);
 
+  const cache = new ServerCache(db);
+
+  await subscribeToAuctions(cache);
+
   console.log("Redis connected");
 
   io.adapter(createAdapter(pubClient, subClient));
@@ -57,13 +62,9 @@ app.get("/", (req: Request, res: Response) => {
       console.log(`a user disconnected [${socket.id}]`);
     });
     socket.on("message", (data: any) => {
-      const message = {
-        message: "pong",
-        data,
-        id: socket.id,
-      };
-      console.log("emit --> ", message);
-      io.emit("message", message);
+      if (data.join) {
+        socket.join(data.join);
+      }
     });
   });
 
