@@ -11,7 +11,7 @@ export interface AuctionInput {
   scheduledISODate: string;
   metadata: AuctionMetadataInput[];
   inscriptionId: string;
-  ordinalsAddress: string;
+  ownerOrdinalsAddress: string;
   txid: string;
   vout: number;
   status: AuctionStatus;

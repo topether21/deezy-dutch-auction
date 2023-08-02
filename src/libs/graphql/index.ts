@@ -62,6 +62,7 @@ export const subscribeToAuctions = async (db: ServerCache) => {
         const data = (
           response.data.dutchAuctionStream as Partial<DutchAuction[]>
         ).map((a) => parseAuction(a));
+        print(data);
       },
       error: console.error,
       complete: () => console.log("finished"),
